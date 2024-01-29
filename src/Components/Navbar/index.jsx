@@ -1,15 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
+import f1 from "../../assets/f-o.png";
+import f2 from "../../assets/f-w.png";
+import f3 from "../../assets/tower.png";
 
 const Navbar = () => {
   const activeStyle = " text-orange-500 underline decoration-orange-500";
 
-  const logoImages = [
-    "../../public/f-o.png",
-    "../../public/tower.png",
-    "../../public/f-w.png",
-    "../../public/tower.png",
-  ];
+  const logoImages = [f1, f3, f2, f1];
   const imageTranstion = () => {
     const [currentImage, setCurrentImage] = useState(0);
 
