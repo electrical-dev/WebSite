@@ -1,0 +1,8 @@
+.fondo-pantalla {
+  background-image: url("backgorund2 1.png"); /* Ajusta el nombre de tu imagen y la ruta según tu estructura de proyecto */
+  background-color: black;
+  background-size: cover; /* Ajusta según tus preferencias */
+  background-position: center; /* Ajusta según tus preferencias */
+  background-repeat: no-repeat; /* Ajusta según tus preferencias */
+  min-height: 100vh; /* Esto asegura que el fondo cubra toda la altura de la ventana */
+}

@@ -1,0 +1,5 @@
+const Layout = ({ children }) => {
+  return <div className="flex flex-col items-center mt-0">{children}</div>;
+};
+
+export default Layout;
