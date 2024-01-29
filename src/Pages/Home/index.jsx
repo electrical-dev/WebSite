@@ -1,6 +1,7 @@
 import Layout from "../../Components/Layout";
 import { NavLink } from "react-router-dom";
 import "./index.css";
+import i1 from "../../assets/I1.png";
 
 function Home() {
   return (
@@ -17,8 +18,8 @@ function Home() {
               className={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
               <img
-                src="../../../public/i1.png"
-                alt=""
+                src={i1}
+                alt={i1}
                 className="w-full h-full object-cover transition-transform transform hover:scale-125"
               />
             </NavLink>
