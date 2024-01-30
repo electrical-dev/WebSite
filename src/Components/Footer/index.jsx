@@ -8,13 +8,13 @@ import {
 
 const Footer = () => {
   return (
-    <nav className="flex justify-between items-center fixed z-20 bottom-0 w-full py-2 px-10  bg-black text-white">
-      <div className="flex text-sm ">
+    <nav className="md:flex  md:justify-between md:items-center fixed z-20 bottom-0 w-full py-2 px-10  bg-black text-white">
+      <div className="flex justify-center text-sm ">
         <span className=" font-bold ">Copyright</span>
         <AiOutlineCopyright className=" text-orange-500" />
         2024 David Avila - Dev
       </div>
-      <ul className="flex items-center gap-6">
+      <ul className="flex justify-center gap-6">
         <li>
           <a
             href="mailto:dsavilav@unal.edu.co"

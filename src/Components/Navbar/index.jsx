@@ -24,13 +24,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-2 px-10 text-md font-light bg-black text-white">
+    <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-2 px-10 md:text-md text-sm font-light bg-black text-white">
       <ul>
         <li>
           <img src={logoImages[imageTranstion()]} className=" size-20" />
         </li>
       </ul>
-      <ul className="md:flex md:items-center md:static transition-all duration-500 ease-in gap-6">
+      <ul className="md:flex   md:items-center md:static transition-all duration-500 ease-in gap-6">
         <li>
           <NavLink
             to="/"
