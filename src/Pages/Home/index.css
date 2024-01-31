@@ -1,6 +1,6 @@
 .fondo-pantalla {
   background-image: url("../../assets/backgorund1.png"); /* Ajusta el nombre de tu imagen y la ruta según tu estructura de proyecto */
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.9);
   background-size: cover; /* Ajusta según tus preferencias */
   background-position: center; /* Ajusta según tus preferencias */
   background-repeat: no-repeat; /* Ajusta según tus preferencias */

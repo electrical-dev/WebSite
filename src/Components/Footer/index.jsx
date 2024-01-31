@@ -7,12 +7,13 @@ import {
 } from "react-icons/ai";
 
 const Footer = () => {
+  const tab = "\u00A0";
   return (
-    <nav className="md:flex  md:justify-between md:items-center fixed z-20 bottom-0 w-full py-2 px-10  bg-black text-white">
-      <div className="flex justify-center text-sm ">
+    <nav className="md:flex  md:justify-between md:items-center fixed z-20 py-1 bottom-0 w-full  gap-6 px-10  bg-black text-white">
+      <div className="flex justify-center text-sm py-2 ">
         <span className=" font-bold ">Copyright</span>
         <AiOutlineCopyright className=" text-orange-500" />
-        2024 David Avila - Dev
+        {tab + tab} 2024 David Avila - Dev
       </div>
       <ul className="flex justify-center gap-6">
         <li>
