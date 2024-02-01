@@ -60,7 +60,7 @@ function Services() {
                   alt=""
                   className="size-auto "
                   animate={{
-                    scale: [1, 1.2, 1, 1, 1],
+                    scale: [1, 1, 1, 1, 1],
                     rotate: [0, 90, 180, 270, 360],
                   }}
                   whileHover={{ scale: 1.2 }}
