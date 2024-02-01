@@ -32,10 +32,10 @@ function Services() {
       tittle: "DISEÑO DE ELECTRICO",
       img: f2,
       review1:
-        "Diseño de instalaciones en: areas clasificadas, residencial, comercial e industrial.",
-      review2: "1- Experiencia en REVIT y AutoCAD.",
-      review3: "2- Apantallamiento y SPT.",
-      review4: "3- Coordinacion de protecciones.",
+        "1- Diseño de instalaciones en: areas clasificadas, residencial, comercial e industrial.",
+      review2: "2- Experiencia en REVIT y AutoCAD.",
+      review3: "3- Apantallamiento y SPT.",
+      review4: "4- Coordinacion de protecciones.",
     },
     {
       id: 3,
