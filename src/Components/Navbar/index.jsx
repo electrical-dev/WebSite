@@ -5,6 +5,7 @@ import { GoEyeClosed } from "react-icons/go";
 import f1 from "../../assets/f-o.png";
 import f2 from "../../assets/f-w.png";
 import f3 from "../../assets/tower.png";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
@@ -35,17 +36,15 @@ const Navbar = () => {
   ];
   let [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="shadow-md w-full fixed top-0 left-0">
+    <div className="shadow-md w-full fixed top-0 left-0 z-0">
       <div className="md:flex items-center justify-between bg-black py-2 md:px-10 px-7">
-        <div>
-          <img
-            src={logoImages[imageTranstion()]}
-            className=" md:size-20 size-16 "
-          />
-        </div>
+        <img
+          src={logoImages[imageTranstion()]}
+          className=" md:size-16 size-16  "
+        />
 
         {/* menu icon */}
-        <div
+        <nav
           onClick={() => setIsOpen(!isOpen)}
           className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden "
         >
@@ -54,18 +53,18 @@ const Navbar = () => {
           ) : (
             <ImMenu className=" text-orange-500 " />
           )}
-        </div>
+        </nav>
         {/* nav links here */}
         <ul
-          className={`md:flex   md:items-center md:pb-0 pb-0 absolute md:static md:z-auto z-[-1] right-0 md:w-auto md:pl-0  pl-5 pr-5 transition-all duration-500 ease-in ${
-            isOpen ? "top-20 bg-black " : "top-[-460px]"
+          className={`md:flex   md:items-center md:pb-0 pb-0 absolute md:static md:z-auto z-[-1] right-0 md:w-auto md:pl-0  pl-5 pr-5 transition-all text-right duration-1000 delay-75 ease-in-out ${
+            isOpen ? "top-20 bg-black rounded-b-xl " : "top-[-460px]"
           } md:opacity-100 `}
         >
           {Links.map((link) => (
             <li key={link.name} className=" md:ml-8 md:text-base md:my-0 my-3">
               <Link
                 to={link.link}
-                className={`text-white hover:text-orange-400  ${
+                className={`text-white hover:text-orange-400 transition-all duration-1000 ease-in-out ${
                   activeSection === link.name ? "text-orange-600 underline" : "" // Agrega la clase para la sección activa
                 }`}
                 onClick={() => {
