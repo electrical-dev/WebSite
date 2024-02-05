@@ -38,9 +38,17 @@ const Navbar = () => {
   return (
     <div className="shadow-md w-full fixed top-0 left-0 z-0">
       <div className="md:flex items-center justify-between bg-black py-2 md:px-10 px-7">
-        <img
+        <motion.img
           src={logoImages[imageTranstion()]}
           className=" md:size-16 size-16  "
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          variants={{
+            hidden: { opacity: 0, x: -50 },
+            visible: { opacity: 1, x: 0 },
+          }}
         />
 
         {/* menu icon */}
