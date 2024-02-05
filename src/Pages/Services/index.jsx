@@ -50,10 +50,10 @@ function Services() {
   ];
 
   return (
-    <div className="fondo-pantalla3 bg-center  h-screen">
+    <div className="fondo-pantalla3 bg-center  h-screen md:bg-cover">
       <Layout>
         <div className=" w-72 md:w-80 lg:w-80 xl:w-80  m-auto ">
-          <div className=" md:flex gap-10 justify-center hidden ">
+          <div className=" md:flex sm:gap-6 md:gap-6 lg:gap-20 xl:gap-36  justify-center hidden ">
             {data.map((d) => (
               <div
                 key={d.id}
