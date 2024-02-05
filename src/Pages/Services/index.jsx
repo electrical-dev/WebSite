@@ -114,21 +114,42 @@ function Services() {
                     alt=""
                     className="size-auto hover:scale-125"
                     animate={{
-                      scale: [1, 1.2, 1, 1, 1],
-                      rotate: [0, 90, 180, 270, 360],
+                      scale: [1, 1, 1, 1, 1],
+                      rotate: [0, -15, 0, 15, 0],
                     }}
                   />
                 </div>
                 <div className="flex flex-col justify-center items-center gap-4 p-2 mx-2">
-                  <h2 className="md:text-xl text-sm text-white font-semibold">
+                  <motion.h2
+                    className="md:text-xl text-sm text-white font-semibold"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ delay: 0.3, duration: 0.6 }}
+                    variants={{
+                      hidden: { opacity: 0, x: 100 },
+                      visible: { opacity: 1, x: 0 },
+                    }}
+                  >
                     {d.tittle}
-                  </h2>
-                  <div className="md:text-xl text-sm ">
+                  </motion.h2>
+
+                  <motion.div
+                    className="text-sm  text-gray-600 "
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ delay: 0.5, duration: 0.6 }}
+                    variants={{
+                      hidden: { opacity: 0, x: 100 },
+                      visible: { opacity: 1, x: 0 },
+                    }}
+                  >
                     <p> {d.review1}</p>
                     <p> {d.review2}</p>
                     <p> {d.review3}</p>
                     <p> {d.review4}</p>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             ))}

@@ -1,6 +1,6 @@
 const Layout = ({ children }) => {
   return (
-    <div className="flex justify-between items-center h-screen ">
+    <div className="flex justify-between items-center h-screen snap-y ">
       {children}
     </div>
   );
