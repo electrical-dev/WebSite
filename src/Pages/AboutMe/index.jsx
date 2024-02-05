@@ -4,7 +4,6 @@ import i1 from "../../assets/acercaDeMi.webp";
 import { motion } from "framer-motion";
 
 function AboutMe() {
-  const tab = "\u00A0";
   return (
     <Layout>
       <div className=" md:flex md:items-center w-full  sm:pt-16 h-3/4 md:px-8 overflow-auto ">

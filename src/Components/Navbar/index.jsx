@@ -5,14 +5,14 @@ import { GoEyeClosed } from "react-icons/go";
 import f1 from "../../assets/f-o.png";
 import f2 from "../../assets/f-w.png";
 import f3 from "../../assets/tower.webp";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState(false);
   const navigate = useNavigate();
 
   const logoImages = [f1, f3, f2, f1];
-  const imageTranstion = () => {
+  const useImageTransition = () => {
     const [currentImage, setCurrentImage] = useState(0);
 
     const changeImage = () => {
@@ -29,10 +29,10 @@ const Navbar = () => {
 
   let Links = [
     { name: "INICIO", link: "/" },
-    { name: "ACERCA DE MI", link: "/about-me" },
+    { name: "ACERCA DE MI", link: "/about" },
     { name: "SERVICIOS", link: "/services" },
     { name: "PROYECTOS", link: "/projects" },
-    { name: "CONTACTAME", link: "/contac-me" },
+    { name: "CONTACTAME", link: "/contact" },
   ];
   let [isOpen, setIsOpen] = useState(false);
 
@@ -40,7 +40,7 @@ const Navbar = () => {
     <div className="shadow-md w-full fixed top-0 left-0 z-0">
       <div className="md:flex items-center justify-between bg-black py-2 md:px-10 px-7">
         <motion.img
-          src={logoImages[imageTranstion()]}
+          src={logoImages[useImageTransition()]}
           className=" md:size-16 size-16  "
           initial="hidden"
           whileInView="visible"
