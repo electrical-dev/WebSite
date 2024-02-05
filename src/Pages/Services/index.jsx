@@ -1,11 +1,12 @@
 import Layout from "../../Components/Layout";
-import f1 from "../../assets/bombilla.png";
-import f2 from "../../assets/plano.png";
-import f3 from "../../assets/motor.png";
+import f1 from "../../assets/bombilla.webp";
+import f2 from "../../assets/plano.webp";
+import f3 from "../../assets/motor.webp";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import "./index.css";
 
 function Services() {
   const settings = {
@@ -29,7 +30,7 @@ function Services() {
     },
     {
       id: 2,
-      tittle: "DISEÑO DE ELECTRICO",
+      tittle: "DISEÑO ELECTRICO",
       img: f2,
       review1:
         "1- Diseño de instalaciones en: areas clasificadas, residencial, comercial e industrial.",
@@ -49,79 +50,30 @@ function Services() {
   ];
 
   return (
-    <Layout>
-      <div className=" w-72 md:w-80 lg:w-80 xl:w-80  m-auto ">
-        <div className=" md:flex gap-10 justify-center hidden ">
-          {data.map((d) => (
-            <div key={d.id} className="  bg-orange-500 h-[450px]  rounded-xl ">
-              <div className="h-56 w-56 rounded-full m-2 bg-gray-400 hover:bg-slate-200 flex items-center">
-                <motion.img
-                  src={d.img}
-                  alt=""
-                  className="size-auto "
-                  animate={{
-                    scale: [1, 1, 1, 1, 1],
-                    rotate: [0, -15, 0, 15, 0],
-                  }}
-                  whileHover={{ scale: 1.2 }}
-                />
-              </div>
-              <div className=" flex flex-col justify-center items-center gap-1  mx-4 ">
-                <motion.h2
-                  className="text-sm text-white font-semibold"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                  variants={{
-                    hidden: { opacity: 0, x: 100 },
-                    visible: { opacity: 1, x: 0 },
-                  }}
-                >
-                  {d.tittle}
-                </motion.h2>
-                <motion.div
-                  className="text-sm text-gray-600 "
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ delay: 0.5, duration: 0.6 }}
-                  variants={{
-                    hidden: { opacity: 0, x: 100 },
-                    visible: { opacity: 1, x: 0 },
-                  }}
-                >
-                  <p> {d.review1}</p>
-                  <p> {d.review2}</p>
-                  <p> {d.review3}</p>
-                  <p> {d.review4}</p>
-                </motion.div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="  md:hidden ">
-          <Slider {...settings}>
+    <div className="fondo-pantalla3 bg-center  h-screen">
+      <Layout>
+        <div className=" w-72 md:w-80 lg:w-80 xl:w-80  m-auto ">
+          <div className=" md:flex gap-10 justify-center hidden ">
             {data.map((d) => (
               <div
                 key={d.id}
-                className=" flex justify-items-center bg-orange-500 h-[450px]  rounded-xl m-auto "
+                className="  bg-orange-500 h-[450px]  rounded-xl "
               >
-                <div className="h-56 w-56 rounded-full mx-8 my-2 bg-gray-300 flex justify-center items-center">
+                <div className="h-56 w-56 rounded-full m-2 bg-gray-400 hover:bg-slate-200 flex items-center">
                   <motion.img
                     src={d.img}
                     alt=""
-                    className="size-auto hover:scale-125"
+                    className="size-auto "
                     animate={{
                       scale: [1, 1, 1, 1, 1],
                       rotate: [0, -15, 0, 15, 0],
                     }}
+                    whileHover={{ scale: 1.2 }}
                   />
                 </div>
-                <div className="flex flex-col justify-center items-center gap-4 p-2 mx-2">
+                <div className=" flex flex-col justify-center items-center gap-1  mx-4 ">
                   <motion.h2
-                    className="md:text-xl text-sm text-white font-semibold"
+                    className="text-sm text-white font-semibold"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.5 }}
@@ -133,9 +85,8 @@ function Services() {
                   >
                     {d.tittle}
                   </motion.h2>
-
                   <motion.div
-                    className="text-sm  text-gray-600 "
+                    className="text-sm text-gray-600 "
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.5 }}
@@ -153,10 +104,65 @@ function Services() {
                 </div>
               </div>
             ))}
-          </Slider>
+          </div>
+
+          <div className="  md:hidden ">
+            <Slider {...settings}>
+              {data.map((d) => (
+                <div
+                  key={d.id}
+                  className=" flex justify-items-center bg-orange-500 h-[450px]  rounded-xl m-auto "
+                >
+                  <div className="h-56 w-56 rounded-full mx-8 my-2 bg-gray-300 flex justify-center items-center">
+                    <motion.img
+                      src={d.img}
+                      alt=""
+                      className="size-auto hover:scale-125"
+                      animate={{
+                        scale: [1, 1, 1, 1, 1],
+                        rotate: [0, -15, 0, 15, 0],
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center items-center gap-4 p-2 mx-2">
+                    <motion.h2
+                      className="md:text-xl text-sm text-white font-semibold"
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.5 }}
+                      transition={{ delay: 0.3, duration: 0.6 }}
+                      variants={{
+                        hidden: { opacity: 0, x: 100 },
+                        visible: { opacity: 1, x: 0 },
+                      }}
+                    >
+                      {d.tittle}
+                    </motion.h2>
+
+                    <motion.div
+                      className="text-sm  text-gray-600 "
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.5 }}
+                      transition={{ delay: 0.5, duration: 0.6 }}
+                      variants={{
+                        hidden: { opacity: 0, x: 100 },
+                        visible: { opacity: 1, x: 0 },
+                      }}
+                    >
+                      <p> {d.review1}</p>
+                      <p> {d.review2}</p>
+                      <p> {d.review3}</p>
+                      <p> {d.review4}</p>
+                    </motion.div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </div>
   );
 }
 

@@ -1,7 +1,7 @@
 import Layout from "../../Components/Layout";
-import i1 from "../../assets/acercaDeMi.png";
+import i1 from "../../assets/acercaDeMi.webp";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 function AboutMe() {
   const tab = "\u00A0";

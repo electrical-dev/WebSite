@@ -9,9 +9,8 @@ function Home() {
     <div className="fondo-pantalla flex items-center justify-center w-full   h-screen">
       <div className=" md:flex  md:justify-items-center md:relative  md:items-center  md:text-2xl text-lg font-light text-white">
         <div className="flex md:flex-col md:flex-1 md:text-right md:m-0 m-10 justify-center md:max-w-40">
-          Diseñador
-          <span className=" text-orange-500">{tab}Electricista </span>
-          {tab}Freelance
+          Ingenieria
+          <span className=" text-orange-500">{tab}Electrica </span>
         </div>
         <div className="flex  md:flex-1 m-10 md:m-10 justify-center">
           <NavLink to="/about-me">

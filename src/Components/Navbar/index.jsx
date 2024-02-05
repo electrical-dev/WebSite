@@ -4,11 +4,11 @@ import { ImMenu } from "react-icons/im";
 import { GoEyeClosed } from "react-icons/go";
 import f1 from "../../assets/f-o.png";
 import f2 from "../../assets/f-w.png";
-import f3 from "../../assets/tower.png";
+import f3 from "../../assets/tower.webp";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState(false);
   const navigate = useNavigate();
 
   const logoImages = [f1, f3, f2, f1];
@@ -35,6 +35,7 @@ const Navbar = () => {
     { name: "CONTACTAME", link: "/contac-me" },
   ];
   let [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="shadow-md w-full fixed top-0 left-0 z-0">
       <div className="md:flex items-center justify-between bg-black py-2 md:px-10 px-7">
@@ -72,12 +73,18 @@ const Navbar = () => {
             <li key={link.name} className=" md:ml-8 md:text-base md:my-0 my-3">
               <Link
                 to={link.link}
-                className={`text-white hover:text-orange-400 transition-all duration-1000 ease-in-out ${
-                  activeSection === link.name ? "text-orange-600 underline" : "" // Agrega la clase para la sección activa
+                className={` hover:text-orange-400 transition-all duration-1000 ease-in-out ${
+                  activeSection === link.name
+                    ? "text-orange-500 "
+                    : "text-white" // Agrega la clase para la sección activa
                 }`}
                 onClick={() => {
                   navigate(link.link); // Navega a la ruta
                   setActiveSection(link.name); // Actualiza el estado
+                  if (window.innerWidth <= 768) {
+                    // Adjust breakpoint as needed
+                    setIsOpen(false); // Close the menu
+                  }
                 }}
               >
                 {link.name}

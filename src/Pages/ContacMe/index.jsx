@@ -4,15 +4,15 @@ import { motion } from "framer-motion";
 
 function ContacMe() {
   return (
-    <div className="fondo-pantalla2 md:bg-contain md:bg-left bg-cover bg-center  ">
+    <div className="fondo-pantalla2 md:bg-contain md:bg-left bg-cover bg-center bg-origin-padding">
       <Layout>
-        <div className=" flex flex-col gap-2 md:ml-48 xl:ml-96 xl:pl-48  w-full  items-center h-1/2 overflow-y-auto">
+        <div className=" flex flex-col gap-y-10 md:ml-48 xl:ml-96 xl:pl-48  w-full  items-center h-1/2 overflow-y-auto">
           <motion.input
             type="text"
             id="name"
             name="name"
             placeholder="Nombre"
-            className=" bg-sky-50/80 enabled:hover:bg-white rounded-md  w-3/4 md:w-1/2"
+            className=" bg-sky-50/80 enabled:hover:bg-white rounded-md  w-3/4 md:w-1/2 h-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -27,7 +27,7 @@ function ContacMe() {
             id="email"
             name="mail"
             placeholder="email@xxxxxx"
-            className=" bg-sky-50/80 enabled:hover:bg-white rounded-md w-3/4 md:w-1/2"
+            className=" bg-sky-50/80 enabled:hover:bg-white rounded-md w-3/4 md:w-1/2 h-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -43,7 +43,7 @@ function ContacMe() {
             cols="0"
             rows="8"
             placeholder="Escribe tu mensaje..."
-            className=" bg-sky-50/80 enabled:hover:bg-white md:w-1/2 w-3/4 rounded-md"
+            className=" bg-sky-50/80 enabled:hover:bg-white md:w-1/2 w-3/4 rounded-md "
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -55,7 +55,7 @@ function ContacMe() {
           ></motion.textarea>
 
           <motion.button
-            className=" bg-orange-500 text-white font-semibold md:w-1/2 w-3/4 rounded-md"
+            className=" bg-orange-500 text-white font-semibold md:w-1/2 w-3/4 rounded-md h-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
