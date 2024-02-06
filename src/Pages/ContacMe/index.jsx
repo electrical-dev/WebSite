@@ -6,7 +6,11 @@ function ContacMe() {
   return (
     <div className="fondo-pantalla2 md:bg-contain md:bg-left bg-cover bg-center bg-origin-padding">
       <Layout>
-        <div className=" flex flex-col gap-y-10 md:ml-48 xl:ml-96 xl:pl-48  w-full  items-center h-1/2 overflow-y-auto">
+        <form
+          action="https://formsubmit.co/dsavilav@unal.edu.co"
+          method="POST"
+          className=" flex flex-col gap-y-10 md:ml-48 xl:ml-96 xl:pl-48  w-full  items-center h-1/2 overflow-y-auto"
+        >
           <motion.input
             type="text"
             id="name"
@@ -25,7 +29,7 @@ function ContacMe() {
           <motion.input
             type="email"
             id="email"
-            name="mail"
+            name="email"
             placeholder="email@xxxxxx"
             className=" bg-sky-50/80 enabled:hover:bg-white rounded-md w-3/4 md:w-1/2 h-16"
             initial="hidden"
@@ -67,7 +71,13 @@ function ContacMe() {
           >
             ENVIAR
           </motion.button>
-        </div>
+          {/* <input type="hidden" name="_captcha" value="false"></input> */}
+          <input
+            type="hidden"
+            name="_next"
+            value="https://david-avila-elec.vercel.app/contact"
+          ></input>
+        </form>
       </Layout>
     </div>
   );
