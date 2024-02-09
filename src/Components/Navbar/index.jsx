@@ -37,7 +37,7 @@ const Navbar = () => {
   let [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="shadow-md w-full fixed top-0 left-0 z-0">
+    <div className="shadow-md w-full fixed top-0 left-0 z-1">
       <div className="md:flex items-center justify-between bg-black py-2 md:px-10 px-7">
         <motion.img
           src={logoImages[useImageTransition()]}
@@ -65,7 +65,7 @@ const Navbar = () => {
         </nav>
         {/* nav links here */}
         <ul
-          className={`md:flex   md:items-center md:pb-0 pb-0 absolute md:static md:z-auto z-[-1] right-0 md:w-auto md:pl-0  pl-5 pr-5 transition-all text-right duration-1000 delay-75 ease-in-out ${
+          className={`md:flex   md:items-center md:pb-0 pb-0 absolute md:static  z-10 right-0 md:w-auto md:pl-0  pl-5 pr-5 transition-all text-right duration-1000 delay-75 ease-in-out ${
             isOpen ? "top-20 bg-black rounded-b-xl " : "top-[-460px]"
           } md:opacity-100 `}
         >

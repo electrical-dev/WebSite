@@ -2,5 +2,5 @@
   background-image: url("../../assets/ingeniero.webp"); /* Ajusta el nombre de tu imagen y la ruta según tu estructura de proyecto */
   background-color: rgba(0, 0, 0);
   background-repeat: no-repeat; /* Ajusta según tus preferencias */
-  min-height: 100vh; /* Esto asegura que el fondo cubra toda la altura de la ventana */
+  min-height: 90vh; /* Esto asegura que el fondo cubra toda la altura de la ventana */
 }

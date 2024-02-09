@@ -5,4 +5,8 @@
   html {
     font-family: "Space Grotesk", system-ui, sans-serif;
   }
+  body,
+  html {
+    overflow-x: hidden;
+  }
 }

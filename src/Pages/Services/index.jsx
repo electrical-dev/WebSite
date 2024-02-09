@@ -5,7 +5,7 @@ import f3 from "../../assets/motor.webp";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import "./index.css";
 
 function Services() {
@@ -50,10 +50,11 @@ function Services() {
   ];
 
   return (
-    <div className="fondo-pantalla3 bg-center  h-screen md:bg-cover">
+    <div className="fondo-pantalla3 bg-center  md:bg-cover h-auto flex justify-center">
       <Layout>
-        <div className=" w-72 md:w-80 lg:w-80 xl:w-80  m-auto ">
-          <div className=" md:flex sm:gap-6 md:gap-6 lg:gap-20 xl:gap-36  justify-center hidden ">
+        <div className=" w-72 md:w-80 lg:w-80 xl:w-80 ">
+          {/* pantalla Grande */}
+          <div className=" md:flex sm:gap-6 md:gap-6 lg:gap-20 xl:gap-36  h-1/2 justify-center hidden ">
             {data.map((d) => (
               <div
                 key={d.id}
@@ -68,7 +69,7 @@ function Services() {
                       scale: [1, 1, 1, 1, 1],
                       rotate: [0, -15, 0, 15, 0],
                     }}
-                    whileHover={{ scale: 1.2 }}
+                    whileHover={{ scale: 1.2, transition: { duration: 0.5 } }}
                   />
                 </div>
                 <div className=" flex flex-col justify-center items-center gap-1  mx-4 ">
@@ -87,6 +88,7 @@ function Services() {
                   </motion.h2>
                   <motion.div
                     className="text-sm text-gray-600 "
+                    whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.5 }}
@@ -105,7 +107,7 @@ function Services() {
               </div>
             ))}
           </div>
-
+          {/* pantalla Celular */}
           <div className="  md:hidden ">
             <Slider {...settings}>
               {data.map((d) => (

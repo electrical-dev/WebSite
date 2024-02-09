@@ -1,30 +1,35 @@
 import React, { createContext, useState, useEffect } from "react";
 
-export const Images = createContext();
+export const CardContext = createContext();
 
-const TransicionImagenes = () => {
-  const imagenes = ["../../public/react.svg", "../../public/react.svg"];
+export const CardProvider = ({ children }) => {
+  const [isProjectDetailOpen, setIsProjectDetailOpen] = useState(false);
+  const openProjectDetail = () => setIsProjectDetailOpen(true);
+  const closeProjectDetail = () => setIsProjectDetailOpen(false);
 
-  const [currentImage, setcurrentImage] = useState(0);
+  const [projectToShow, setProjectToShow] = useState({});
 
-  const cambiarImagen = () => {
-    setcurrentImage((currentImage + 1) % imagenes.length);
-  };
+  const [items, setItems] = useState(null);
 
   useEffect(() => {
-    const intervalo = setInterval(cambiarImagen, 3000); // Cambia la imagen cada 3000 milisegundos (3 segundos)
-
-    return () => clearInterval(intervalo); // Limpia el intervalo cuando el componente se desmonta
-  }, [currentImage]);
-
-  //const rootImage = imagenes[currentImage];
-  //return rootImage;
-
+    fetch("../products.json") // Replace with your actual data source
+      .then((response) => response.json())
+      .then((data) => setItems(data));
+  }, []);
+  console.log(items);
   return (
-    <Images.Provider
+    <CardContext.Provider
       value={{
-        currentImage,
+        isProjectDetailOpen,
+        setIsProjectDetailOpen,
+        openProjectDetail,
+        closeProjectDetail,
+        projectToShow,
+        setProjectToShow,
+        items, // Make sure items is included in the value
       }}
-    ></Images.Provider>
+    >
+      {children}
+    </CardContext.Provider>
   );
 };

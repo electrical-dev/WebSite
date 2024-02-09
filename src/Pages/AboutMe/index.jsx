@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 function AboutMe() {
   return (
     <Layout>
-      <div className=" md:flex md:items-center w-full  sm:pt-16 h-3/4 md:px-8 overflow-auto ">
+      <div className=" md:flex md:items-center md:justify-center w-full ">
         <motion.p
-          className="  text-gray-800 md:text-right md:mx-10 m-10 md:w-3/4 top-0 "
+          className="  text-gray-800 md:text-right mx-10 md:w-2/5  "
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
@@ -39,7 +39,7 @@ function AboutMe() {
           }}
           src={i1}
           alt={i1}
-          className="size-full md:w-1/2 object-contain "
+          className="size-auto md:w-2/5  object-cover "
         />
       </div>
     </Layout>

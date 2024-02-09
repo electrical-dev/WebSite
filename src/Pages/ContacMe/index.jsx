@@ -4,19 +4,19 @@ import { motion } from "framer-motion";
 
 function ContacMe() {
   return (
-    <div className="fondo-pantalla2 md:bg-contain md:bg-left bg-cover bg-center bg-origin-padding">
+    <div className="fondo-pantalla2 h-auto mt-20 mb-0 md:bg-contain md:bg-left bg-cover bg-center ">
       <Layout>
         <form
           action="https://formsubmit.co/dsavilav@unal.edu.co"
           method="POST"
-          className=" flex flex-col gap-y-10 md:ml-48 xl:ml-96 xl:pl-48  w-full  items-center h-1/2 overflow-y-auto"
+          className=" flex flex-col md:gap-y-10 gap-y-5  items-center  justify-center md:items-end relative h-1/2 w-4/5 "
         >
           <motion.input
             type="text"
             id="name"
             name="name"
             placeholder="Nombre"
-            className=" bg-sky-50/80 enabled:hover:bg-white rounded-md  w-3/4 md:w-1/2 h-16"
+            className=" bg-sky-50/80 enabled:hover:bg-white rounded-md  w-full md:w-1/2 h-14"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -31,7 +31,7 @@ function ContacMe() {
             id="email"
             name="email"
             placeholder="email@xxxxxx"
-            className=" bg-sky-50/80 enabled:hover:bg-white rounded-md w-3/4 md:w-1/2 h-16"
+            className=" bg-sky-50/80 enabled:hover:bg-white rounded-md w-full md:w-1/2 h-14"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -47,7 +47,7 @@ function ContacMe() {
             cols="0"
             rows="8"
             placeholder="Escribe tu mensaje..."
-            className=" bg-sky-50/80 enabled:hover:bg-white md:w-1/2 w-3/4 rounded-md "
+            className=" bg-sky-50/80 enabled:hover:bg-white w-full md:w-1/2 rounded-md "
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -59,7 +59,7 @@ function ContacMe() {
           ></motion.textarea>
 
           <motion.button
-            className=" bg-orange-500 text-white font-semibold md:w-1/2 w-3/4 rounded-md h-16"
+            className=" bg-orange-500 text-white font-semibold w-full md:w-1/2 rounded-md h-14 "
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}

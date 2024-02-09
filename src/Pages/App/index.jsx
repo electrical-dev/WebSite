@@ -1,4 +1,5 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
+import { CardProvider } from "../../Context";
 import Home from "../Home";
 import AboutMe from "../AboutMe";
 import Services from "../Services";
@@ -8,6 +9,7 @@ import ContacMe from "../ContacMe";
 import NavBar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
 import "./App.css";
+import Layout from "../../Components/Layout";
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -23,13 +25,15 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-
-      <NavBar />
-
-      <Footer />
-    </BrowserRouter>
+    <CardProvider>
+      <BrowserRouter>
+        <div className="flex flex-col">
+          <AppRoutes />
+          <NavBar />
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </CardProvider>
   );
 };
 
