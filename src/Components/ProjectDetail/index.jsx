@@ -10,13 +10,13 @@ const ProjectDetail = () => {
     <aside
       className={`${
         context.isProjectDetailOpen ? "flex" : "hidden"
-      } project-detail flex flex-col fixed right-5 border border-black rounded-lg bg-white `}
+      } project-detail flex flex-col fixed md:right-5 border border-orange-400 rounded-lg bg-white overflow-y-auto pb-10`}
     >
       <div className="flex justify-between items-center p-6 ">
-        <h2 className=" font-medium text-xl ">Detail</h2>
+        <h2 className=" font-medium text-xl text-orange-600">Description</h2>
         <div>
           <RxEyeClosed
-            className=" text-blue-700 cursor-pointer "
+            className=" text-orange-700 cursor-pointer "
             onClick={() => context.closeProjectDetail()}
           ></RxEyeClosed>
         </div>
@@ -30,7 +30,7 @@ const ProjectDetail = () => {
       </figure>
       <p className="flex flex-col p-6">
         <span className=" font-medium text-2xl">
-          $ {context.projectToShow.price}
+          {context.projectToShow.company}
         </span>
         <span className=" font-medium text-md">
           {context.projectToShow.name}

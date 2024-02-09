@@ -87,7 +87,7 @@ function Services() {
                     {d.tittle}
                   </motion.h2>
                   <motion.div
-                    className="text-sm text-gray-600 "
+                    className="text-sm text-gray-900 "
                     whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
                     initial="hidden"
                     whileInView="visible"
