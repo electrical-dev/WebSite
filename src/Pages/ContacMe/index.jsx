@@ -4,8 +4,12 @@ import { motion } from "framer-motion";
 
 function ContacMe() {
   return (
-    <div className="fondo-pantalla2 h-auto mt-20 mb-0 md:bg-contain md:bg-left bg-cover bg-center ">
+    <div className="fondo-pantalla2 h-full mt-20  md:bg-contain md:bg-left bg-cover bg-center ">
       <Layout>
+        {/* <h1 className="text-white text-center mb-2  text-3xl font-semibold ">
+          {" "}
+          Contactame{" "}
+        </h1> */}
         <form
           action="https://formsubmit.co/dsavilav@unal.edu.co"
           method="POST"

@@ -52,6 +52,9 @@ function Services() {
   return (
     <div className="fondo-pantalla3 bg-center  md:bg-cover h-auto flex justify-center">
       <Layout>
+        {/* <h1 className="text-white text-center mb-2  text-sm md:text-2xl font-semibold ">
+          Servicios
+        </h1> */}
         <div className=" w-72 md:w-80 lg:w-80 xl:w-80 ">
           {/* pantalla Grande */}
           <div className=" md:flex sm:gap-6 md:gap-6 lg:gap-20 xl:gap-36  h-1/2 justify-center hidden ">

@@ -17,10 +17,9 @@ function Projects() {
   return (
     <div className=" bg-gradient-to-t from-slate-600 to-black ">
       <Layout>
-        <h1 className="felx justify-center text-2xl text-orange-600 mb-2">
-          Proyectos y experiencia
-        </h1>
-        {/* {projectsRendered} */}
+        {/* <h1 className="felx justify-center text-xl md:text-2xl text-white font-semibold mb-2">
+          Proyectos y experiencia laboral
+        </h1> */}
 
         <div className="flex flex-col justify-center items-center gap-y-10 w-full ">
           {projectsRendered}

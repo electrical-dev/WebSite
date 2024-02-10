@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ImMenu } from "react-icons/im";
+import { SiWheniwork } from "react-icons/si";
 import { GoEyeClosed } from "react-icons/go";
 import f1 from "../../assets/f-o.png";
 import f2 from "../../assets/f-w.png";
@@ -60,13 +60,13 @@ const Navbar = () => {
           {isOpen ? (
             <GoEyeClosed className=" text-orange-500" />
           ) : (
-            <ImMenu className=" text-orange-500 " />
+            <SiWheniwork className=" text-orange-500 " />
           )}
         </nav>
         {/* nav links here */}
         <ul
-          className={`md:flex   md:items-center md:pb-0 pb-0 absolute md:static  z-10 right-0 md:w-auto md:pl-0  pl-5 pr-5 transition-all text-right duration-1000 delay-75 ease-in-out ${
-            isOpen ? "top-20 bg-black rounded-b-xl " : "top-[-460px]"
+          className={`md:flex   md:items-center md:pb-0 pb-0 absolute md:static  z-[10] right-0 md:w-auto md:pl-0  pl-5 pr-5 transition-all text-right duration-1000 delay-75 ease-in-out ${
+            isOpen ? "top-20 bg-black rounded-b-xl " : "top-[-460px] z-[-1] "
           } md:opacity-100 `}
         >
           {Links.map((link) => (
@@ -74,13 +74,13 @@ const Navbar = () => {
               <Link
                 to={link.link}
                 className={` hover:text-orange-400 transition-all duration-1000 ease-in-out ${
-                  activeSection === link.name
+                  activeSection === link.link
                     ? "text-orange-500 "
                     : "text-white" // Agrega la clase para la sección activa
                 }`}
                 onClick={() => {
                   navigate(link.link); // Navega a la ruta
-                  setActiveSection(link.name); // Actualiza el estado
+                  setActiveSection(link.link); // Actualiza el estado
                   if (window.innerWidth <= 768) {
                     // Adjust breakpoint as needed
                     setIsOpen(false); // Close the menu

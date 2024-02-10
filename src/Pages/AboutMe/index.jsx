@@ -1,6 +1,6 @@
 import Layout from "../../Components/Layout";
 import i1 from "../../assets/acercaDeMi.webp";
-
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 function AboutMe() {
@@ -25,8 +25,13 @@ function AboutMe() {
           crear diseños, cumpliendo con normativas de seguridad y estándares.
           Con experiencia en campo, comprendo los desafíos y complejidades de
           implementación. Siempre busco superar expectativas y mantenerme
-          actualizado en las últimas tecnologías. ¡Contáctame para discutir cómo
-          puedo ayudarte en tu próximo proyecto!
+          actualizado en las últimas tecnologías. <br />
+          <Link to="/contact">
+            <span className=" text-orange-500 font-semibold text-xl cursor-pointer ">
+              ¡Contáctame para discutir cómo puedo ayudarte en tu próximo
+              proyecto!
+            </span>
+          </Link>
         </motion.p>
         <motion.img
           initial="hidden"
