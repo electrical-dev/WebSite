@@ -23,7 +23,7 @@ const Footer = () => {
             rel="noopener noreferrer"
           >
             <i className="fas fa-icono"></i>
-            <AiFillMail className=" size-6 " />
+            <AiFillMail className=" size-6 " alt="mail-icon" />
           </a>
         </li>
         <li>
@@ -33,7 +33,7 @@ const Footer = () => {
             rel="noopener noreferrer"
           >
             <i className="fas fa-icono"></i>
-            <AiFillLinkedin className=" size-6 " />
+            <AiFillLinkedin className=" size-6 " alt="linkedin-icon" />
           </a>
         </li>
         <li>
@@ -43,7 +43,7 @@ const Footer = () => {
             rel="noopener noreferrer"
           >
             <i className="fas fa-icono"></i>
-            <AiOutlineWhatsApp className=" size-6 " />
+            <AiOutlineWhatsApp className=" size-6 " alt="whatsapp-icon" />
           </a>
         </li>
 
@@ -54,7 +54,7 @@ const Footer = () => {
             rel="noopener noreferrer"
           >
             <i className="fas fa-icono"></i>
-            <AiFillGithub className=" size-6 " />
+            <AiFillGithub className=" size-6  " alt="github-icon" />
           </a>
         </li>
       </ul>

@@ -6,11 +6,11 @@ import f1 from "../../assets/f-o.png";
 import f2 from "../../assets/f-w.png";
 import f3 from "../../assets/tower.webp";
 import { motion } from "framer-motion";
+import Typewriter from "typewriter-effect";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState(false);
   const navigate = useNavigate();
-
   const logoImages = [f1, f3, f2, f1];
   const useImageTransition = () => {
     const [currentImage, setCurrentImage] = useState(0);
@@ -39,18 +39,43 @@ const Navbar = () => {
   return (
     <div className="shadow-md w-full fixed top-0 left-0 z-1">
       <div className="md:flex items-center justify-between bg-black py-2 md:px-10 px-7">
-        <motion.img
-          src={logoImages[useImageTransition()]}
-          className=" md:size-16 size-16  "
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          variants={{
-            hidden: { opacity: 0, x: -50 },
-            visible: { opacity: 1, x: 0 },
-          }}
-        />
+        <div className="flex flex-row gap-5 items-center">
+          <motion.img
+            src={logoImages[useImageTransition()]}
+            alt="Logo"
+            className=" md:size-16 size-16  "
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            variants={{
+              hidden: { opacity: 0, x: -50 },
+              visible: { opacity: 1, x: 0 },
+            }}
+          />
+          <h1 className=" text-orange-400">
+            <Typewriter
+              // onInit={(typewriter) => {
+              //   typewriter
+              //     .typeString("David Avila")
+              //     .callFunction(() => {
+              //       console.log("String typed out!");
+              //     })
+              //     .pauseFor(2500)
+              //     .deleteAll()
+              //     .callFunction(() => {
+              //       console.log("All strings were deleted");
+              //     })
+              //     .start();
+              // }}
+              options={{
+                strings: ["David Avila", "Ingeniero Electricista"],
+                autoStart: true,
+                loop: true,
+              }}
+            />
+          </h1>
+        </div>
 
         {/* menu icon */}
         <nav
