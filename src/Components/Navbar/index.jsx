@@ -38,7 +38,7 @@ const Navbar = () => {
 
   return (
     <div className="shadow-md w-full fixed top-0 left-0 z-1">
-      <div className="md:flex items-center justify-between bg-black py-2 md:px-10 px-7">
+      <div className="md:flex items-center justify-between bg-gray-800 py-2 md:px-10 px-7">
         <div className="flex flex-row gap-5 items-center">
           <motion.img
             src={logoImages[useImageTransition()]}
@@ -53,21 +53,8 @@ const Navbar = () => {
               visible: { opacity: 1, x: 0 },
             }}
           />
-          <h1 className=" text-orange-400">
+          <h1 className=" text-white font-bold">
             <Typewriter
-              // onInit={(typewriter) => {
-              //   typewriter
-              //     .typeString("David Avila")
-              //     .callFunction(() => {
-              //       console.log("String typed out!");
-              //     })
-              //     .pauseFor(2500)
-              //     .deleteAll()
-              //     .callFunction(() => {
-              //       console.log("All strings were deleted");
-              //     })
-              //     .start();
-              // }}
               options={{
                 strings: ["David Avila", "Ingeniero Electricista"],
                 autoStart: true,
@@ -91,7 +78,7 @@ const Navbar = () => {
         {/* nav links here */}
         <ul
           className={`md:flex   md:items-center md:pb-0 pb-0 absolute md:static  z-[10] right-0 md:w-auto md:pl-0  pl-5 pr-5 transition-all text-right duration-1000 delay-75 ease-in-out ${
-            isOpen ? "top-20 bg-black rounded-b-xl " : "top-[-460px] z-[-1] "
+            isOpen ? "top-20 bg-gray-800 rounded-b-xl " : "top-[-460px] z-[-1] "
           } md:opacity-100 `}
         >
           {Links.map((link) => (

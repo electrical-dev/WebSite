@@ -1,10 +1,9 @@
 import Layout from "../../Components/Layout";
-import "./index.css";
 import { motion } from "framer-motion";
 
-function ContacMe() {
+function Calculator() {
   return (
-    <div className="fondo-pantalla2 h-full mt-20  md:bg-contain md:bg-left bg-cover bg-center bg-gray-800">
+    <div className="fondo-pantalla2 h-full mt-20  md:bg-contain md:bg-left bg-cover bg-center ">
       <Layout>
         {/* <h1 className="text-white text-center mb-2  text-3xl font-semibold ">
           {" "}
@@ -87,4 +86,4 @@ function ContacMe() {
   );
 }
 
-export default ContacMe;
+export default Calculator;

@@ -2,42 +2,42 @@
     {
         "id": 5,
         "name": "Ingeniero de proyectos",
-        "image": "https://www.jagcia.com/sitio/images/2018/04/03/ingenieria-electrica-jorge-gomez.png.jpg",
-        "company": "Jorge A. Gomez y CIA ",
+        "image": ["https://www.jagcia.com/sitio/images/2018/04/03/ingenieria-electrica-jorge-gomez.png.jpg"],
+        "company": "Experiencia Laboral en:Jorge A. Gomez y CIA ",
         "category": "Diseño electrico, AS-Built, AutoCAD, informes " ,
         "description": "Principales funciones: Diseño eléctrico de instalaciones especiales en plantas de hidrocarburos. Residente en proyectos de implementación de telemetría en tanques de hidrocarburos, infraestructura eléctrica para moto-bombas, conexionado y control de equipos. Manejo de personal. Realización de informes de seguimiento de obra, cronogramas y planes de instalación de equipos. Cierres documentales y planos AS-built. Estudios electricos en campo: Telemetria y medicion de sistemas de puesta a tierra."
     },
     {
         "id": 4,
         "name": "Ingeniero de proyectos - Residente",
-        "image": "https://lh3.googleusercontent.com/pw/ABLVV85KplAcGub2uU8VK6WJoCeqPVep3zqpf2HokfXXNtYQXQ_BbLETR37sFdxlHoorTiE_TS9F3gt54vE0plovpHuqMDcsVAP4znEPFfHbFzjQCqXpZiscQkvyoegoUpLcFK6LP7BmzEZ6fkbzY6JAQU0iN661FGfMD7ioGK6dBWjEaB2Fw2PFTV5zzV3gHsvZjm1sifVnHUZSrws4VeNQPaCryFj1d4_kAWiYerbs7V9iwmdL532_R_7jnB-kSmbZIilGgLtsaQFDXMySGuvN8TbSbFHG5aN5z7TAR1NHxUZxwhKikFgHfJ8LfoWgvkaz1TsHOaX0susvBUBflKMUwfqVmKyUjLFT4ghktptFaWP3GyudSJMX-MQkfK9TJ3YnJQR1RBZA6LJZllS7I5sUSjsjGsh_MX0CIwXAmpT8te1XaEiU8XmwM0zkP2NJU8JZmeWmixue0LYLcDOJflLFJ7I1tObBtDGWBvWiH-zC63WClvD7hYWmbn9nl73EpGXVjctfuIWYeN4NOTgCUKp3jJSbdpE7aQq7D71ZkEZwVtmLwhzSfmNq35zdO1Sj1tx4-M78L0vLoNxUovyJIiF9e6m8rcD1zwsN90V8EIqPN-mZnBXDcl6g0QNiV1SsGS8J6EmPIDoK9VHKbnBPT8n3R4nswq1tLsaObDXZDYTHULjFpZHgE6kd7Xv2e_3YLBHgM8miOyhjKEGbXzUg4S0mncx9gjN2-dzdEEuAhsyaureWcvzRBfpRjPfaBASWp6_rqyL-N0o3veQEUdNVLZ9-eusuDLWQab6F92W1sgs1EoWXR0Jmd7RCBcMeBHWu3bkOxc-beKgOP0kld1m2NhSCs8YFjXCkTqhDbiYj4EyLsPHW2VOsKLUipR1o_6pCSHsGuYqD93KmWWloTJqI6wvY4avFats7aYAuJygDEf70gI0kf3O_CJrR_pnR0RiaKQZAt6_yEbPbwywv8JHj4QW_-63gXTsEgdfzVg=w1215-h911-s-no-gm?authuser=1",
-        "company": "Energia Integral Andina",
+        "image": [""],
+        "company": "Experiencia Laboral en: Energia Integral Andina",
         "category": "Manejo de personal, AutoCAD, " ,
         "description": "Participacion en proyecto VIA 40 (Renovacion de infraestructura electrica y de datos Peaje Chusaca y Chinauta): Oficinas Unity Pereira ( Diseño electrico (Salidas electricas, iluminacion y HVAC), CCTV, Deteccion de incendios. Proyecto Datacenter 30MVA cliente BCEI, diseño de acometidas principales, sistema de potencia, infraestructura electrica, REVIT, metodologia BIM."
     },
     {
         "id": 3,
         "name": "Ingeniero de proyectos - Diseñador electricista",
-        "image": "https://jicingenieria.com/wp-content/uploads/2023/08/LOGO-PARA-FONDO-CLARO-CON-FONDO.png",
-        "company": "JIC Ingenieria",
+        "image": ["https://jicingenieria.com/wp-content/uploads/2023/08/LOGO-PARA-FONDO-CLARO-CON-FONDO.png"],
+        "company": " Experiencia Laboral en: JIC Ingenieria",
         "category": "Diseño electrico, AutoCAD, REVIT, Elecal " ,
         "description": "Participacion en proyectos destacados: Oficinas Unity Pereira ( Diseño electrico (Salidas electricas, iluminacion y HVAC), CCTV, Deteccion de incendios. Proyecto Datacenter 30MVA cliente BCEI, diseño de acometidas principales, sistema de potencia, infraestructura electrica, REVIT, metodologia BIM."
     },
     {
         "id": 2,
         "name": "Supervisor Electricista",
-        "image": "https://www.cintastransportadorastapyc.com/wp-content/uploads/2018/09/cinta-equipaje-personas.jpg",
-        "company": "Beumer Group - Aeropuerto el Dorado",
+        "image": ["https://www.cintastransportadorastapyc.com/wp-content/uploads/2018/09/cinta-equipaje-personas.jpg"],
+        "company": "Experiencia Laboral en:Beumer Group - Aeropuerto el Dorado",
         "category": "sistema de bandas trasnportadores de equipaje" ,
         "description": " Supervision de personal de mantenimiento de bandas transportadoras de equipajes, programacion de manteniminetos copn el area de operaciones."
     },
     {
         "id": 1,
-        "name": "Fotometrico institucion educativa",
-        "image": "https://lh3.googleusercontent.com/pw/ABLVV85uMDSMG31-8lYYcvCbQhvQEfM5MlHInFqdmnsxhfhIKDnPkFS1KoJb2YHcL8U7XkmNGyK2nWsUxUkd-fdXSBQ5dZvgUd-kZSpmty8rf-54UJH1d_vySQA-vWHWJH6vq2VFf4gHm-4srNBt3dvA8zdm4QnkRCL1sJd59J8YfieLva75HYWNUI-YenmZcHB7iooYpVI9wCm3jKck34P0xDqn0hdp5ey63CCL2QumNIf8lvzzlIN2Bkn9Sft76B8SLhkP05yljRrYYQpzA9QvtBqRwWfvl-JlanVD8HM7_sBYKddlJgAFdOpYSiiig-LBl-ZzNDEFG70dlZvb9F56rHOro1ojtSAKJ2u8sQsgQeD8aweTCVls2Ly4HDE7PHtmKGT-gUlz12k0VBCX_eZ9gcrRYsxafQl_-ilQ9zcnzgejx4vgHSNvQY8-1gAr93ZQ_ze0v3xN_MLxL2YilxyuGP7ywNJyutun6EZqaYlYvd0yI802dvJwKuEO0jQyksKWn2KJO3JO6ZhxHlkPNNaGkkurszo213YP1j9uh1zZCLjbSwH_bVOxzTmqrDQXlOqI4RvHzIbR1Wpae4Rh5RS9pW1yDFFwCqUfvGfetDMb2sOKy-8LtkGaiSt8TEKdBG-eQGLuuxvgH_GoNAJBn5SC_6x1mu7UiznZmx_KCnqyx0esgbw92wO8RMYnXYRtkf5CgXgZuwrfn43YgALNwIkH9yhfhWbbEE1evPo4TyTSKz-UuG1CvEIegFBkxCEeFydFczS7g9wBXrRkKvBFGvVnvIY3lLRKJWLCQb0x9ueDmTrfmYUgQ81Y2zKj5Xf_FBr9gYJzP0KdudHCpuSdjR69NUBj8vO_aXumIp5xGiRQii1kM3ihS-YE3GApLtMWeIUYtVO-SiSKX3IhNHqk_vpMaPGvZ8a-mNWskMsHEEAMxZbWYQ0v_rNWMvGvEH6W=w811-h588-s-no-gm?authuser=1",
-        "company": "Freelance",
+        "name": "Diseño electrico y Fotometrico institucion educativa",
+        "image": ["../src/assets/Proyectos/1f1.png", "../src/assets/Proyectos/1f2.png", "../src/assets/Proyectos/1f3.png", "../src/assets/Proyectos/1f4.png"],
+        "company": "Proyecto Freelance",
         "category": "Iluminacion, Dialux evo, AutoCAD",
-        "description": "Se realizo el diseño de iluminacion fotometrico e implantacion de luminarias en AutoCAD, se entregaron memorias de calculo RETILAP con especificaciones para centros educativos."
+        "description": "Se realizo el diseño electrico y de iluminacion fotometrico con implantacion de luminarias en AutoCAD, se entregaron memorias de calculo RETILAP con especificaciones para centros educativos y memorias de calculos electricos."
     }
     
    

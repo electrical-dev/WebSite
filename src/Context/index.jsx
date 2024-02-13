@@ -16,7 +16,6 @@ export const CardProvider = ({ children }) => {
       .then((response) => response.json())
       .then((data) => setItems(data));
   }, []);
-  console.log(items);
   return (
     <CardContext.Provider
       value={{

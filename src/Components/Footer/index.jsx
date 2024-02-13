@@ -9,7 +9,7 @@ import {
 const Footer = () => {
   const tab = "\u00A0";
   return (
-    <nav className="md:flex  md:justify-between md:items-center fixed z-20 py-1 bottom-0 w-full  gap-6 px-10  bg-black text-white">
+    <nav className="md:flex  md:justify-between md:items-center fixed z-20 py-1 bottom-0 w-full  gap-6 px-10  bg-gray-800 text-white">
       <div className="flex justify-center text-sm py-2 ">
         <span className=" font-bold ">Copyright</span>
         <AiOutlineCopyright className=" text-orange-500" />
