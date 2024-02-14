@@ -28,7 +28,7 @@ const ProjectDetail = () => {
       } project-detail flex flex-col fixed items-center w-3/4 md:w-1/5 lg:1/5 md:right-5 border border-orange-400 rounded-lg bg-gray-800 text-white overflow-y-auto h-3/4  `}
     >
       <div className="flex flex-row  justify-between w-full  p-6 ">
-        <h2 className=" font-medium text-xl text-orange-600">Description</h2>
+        <h2 className=" font-medium text-xl text-orange-600">Descripción</h2>
         <GoEyeClosed
           className=" text-orange-700 cursor-pointer size-7 "
           onClick={() => context.closeProjectDetail()}
