@@ -16,7 +16,7 @@ const CardProject = (data) => {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center md:px-12 md:flex-row gap-1 md:gap-5 xl:w-1/2 w-3/4 md:h-auto h-100  bg-gray-300  rounded-lg border border-double border-orange-700 p-5">
+    <div className="flex flex-col justify-between items-center md:px-12 md:flex-row gap-1 md:gap-5 xl:w-3/5 2xl:w-1/2 w-3/4 md:h-auto h-100  bg-gray-300  rounded-lg border border-double border-orange-700 p-5">
       <div className="flex flex-col md:w-3/4 ">
         <p className="flex flex-grow items-center gap-1 text-base md:text-lg font-medium">
           <MdOutlineElectricBolt className=" h-5 text-orange-500" />
@@ -31,10 +31,10 @@ const CardProject = (data) => {
           <span className="w-10/12">{data.data.category}</span>
         </p>
         <p
-          className="  flex flex-grow items-end justify-end gap-2 text-sm md:text-base font-extralight italic  text-orange-500 cursor-pointer "
+          className="  flex flex-grow items-end justify-end gap-2 text-sm md:text-base font-extralight italic  text-orange-600 cursor-pointer mr-10"
           onClick={() => showProject(data.data)}
         >
-          <span>ver mas</span>
+          <span className=" underline">...ver mas</span>
           <MdOutlineElectricalServices />
         </p>
       </div>

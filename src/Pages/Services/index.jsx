@@ -1,6 +1,6 @@
 import Layout from "../../Components/Layout";
 import f1 from "../../assets/bombilla.webp";
-import f2 from "../../assets/Ing1.png";
+import f2 from "../../assets/Ing1.webp";
 import f3 from "../../assets/motor.webp";
 import f4 from "../../assets/plano.webp";
 import Slider from "react-slick";

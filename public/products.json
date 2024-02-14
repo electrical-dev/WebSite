@@ -2,7 +2,7 @@
     {
         "id": 5,
         "name": "Ingeniero de proyectos",
-        "image": ["https://www.jagcia.com/sitio/images/2018/04/03/ingenieria-electrica-jorge-gomez.png.jpg"],
+        "image": ["../Proyectos/JAG1.webp"],
         "company": "Experiencia Laboral en:Jorge A. Gomez y CIA ",
         "category": "Diseño electrico, AS-Built, AutoCAD, informes " ,
         "description": "Principales funciones: Diseño eléctrico de instalaciones especiales en plantas de hidrocarburos. Residente en proyectos de implementación de telemetría en tanques de hidrocarburos, infraestructura eléctrica para moto-bombas, conexionado y control de equipos. Manejo de personal. Realización de informes de seguimiento de obra, cronogramas y planes de instalación de equipos. Cierres documentales y planos AS-built. Estudios electricos en campo: Telemetria y medicion de sistemas de puesta a tierra."
@@ -10,34 +10,60 @@
     {
         "id": 4,
         "name": "Ingeniero de proyectos - Residente",
-        "image": [""],
-        "company": "Experiencia Laboral en: Energia Integral Andina",
+        "image": ["../Proyectos/eiasa.webp"],
+        "company": "Experiencia Laboral: Energia Integral Andina",
         "category": "Manejo de personal, AutoCAD, " ,
         "description": "Participacion en proyecto VIA 40 (Renovacion de infraestructura electrica y de datos Peaje Chusaca y Chinauta): Oficinas Unity Pereira ( Diseño electrico (Salidas electricas, iluminacion y HVAC), CCTV, Deteccion de incendios. Proyecto Datacenter 30MVA cliente BCEI, diseño de acometidas principales, sistema de potencia, infraestructura electrica, REVIT, metodologia BIM."
     },
     {
-        "id": 3,
+        "id": 6,
         "name": "Ingeniero de proyectos - Diseñador electricista",
-        "image": ["https://jicingenieria.com/wp-content/uploads/2023/08/LOGO-PARA-FONDO-CLARO-CON-FONDO.png"],
-        "company": " Experiencia Laboral en: JIC Ingenieria",
+        "image": ["../Proyectos/JIC.webp"],
+        "company": " Experiencia Laboral: JIC Ingenieria",
         "category": "Diseño electrico, AutoCAD, REVIT, Elecal " ,
         "description": "Participacion en proyectos destacados: Oficinas Unity Pereira ( Diseño electrico (Salidas electricas, iluminacion y HVAC), CCTV, Deteccion de incendios. Proyecto Datacenter 30MVA cliente BCEI, diseño de acometidas principales, sistema de potencia, infraestructura electrica, REVIT, metodologia BIM."
     },
     {
-        "id": 2,
+        "id": 5,
         "name": "Supervisor Electricista",
-        "image": ["https://www.cintastransportadorastapyc.com/wp-content/uploads/2018/09/cinta-equipaje-personas.jpg"],
-        "company": "Experiencia Laboral en:Beumer Group - Aeropuerto el Dorado",
-        "category": "sistema de bandas trasnportadores de equipaje" ,
-        "description": " Supervision de personal de mantenimiento de bandas transportadoras de equipajes, programacion de manteniminetos copn el area de operaciones."
+        "image": ["../Proyectos/Beumer1.webp"],
+        "company": "Experiencia Laboral: Beumer Group",
+        "category": "Aeropuerto el Dorado-Sistema de bandas trasnportadores de equipaje" ,
+        "description": " Supervision de personal de mantenimiento de bandas transportadoras de equipajes, programacion de manteniminetos con el area de operaciones del aeropuerto el Dorado."
     },
+    
     {
-        "id": 1,
-        "name": "Diseño electrico y Fotometrico institucion educativa",
-        "image": ["../src/assets/Proyectos/1f1.png", "../src/assets/Proyectos/1f2.png", "../src/assets/Proyectos/1f3.png", "../src/assets/Proyectos/1f4.png"],
+        "id": 4,
+        "name": "Diseño electrico Hogar Gediatrico",
+        "image": ["../Proyectos/4f4.webp", "../Proyectos/4f3.webp", "../Proyectos/4f2.webp", "../Proyectos/4f1.webp"],
         "company": "Proyecto Freelance",
         "category": "Iluminacion, Dialux evo, AutoCAD",
         "description": "Se realizo el diseño electrico y de iluminacion fotometrico con implantacion de luminarias en AutoCAD, se entregaron memorias de calculo RETILAP con especificaciones para centros educativos y memorias de calculos electricos."
+    },
+    {
+        "id": 3,
+        "name": "Diseño electrico y Fotometrico restaurante",
+        "image": ["../Proyectos/3f1.webp", "../Proyectos/3f2.webp", "../Proyectos/3f3.webp"],
+        "company": "Proyecto Freelance",
+        "category": "Iluminacion, Dialux evo, AutoCAD",
+        "description": "Se realizo el diseño eléctrico y de iluminación fotométrico con implantación de luminarias en AutoCAD de restaurante, se entregaron memorias de cálculo RETILAP con especificaciones memorias de cálculos eléctricos."
+    }
+    ,
+    {
+        "id": 2,
+        "name": "Diseño Fotometrico polideportivo de la Institución Educativa Alfonso López Pumarejo Sede Divino Niño",
+        "image": ["../Proyectos/2f1.webp", "../Proyectos/2f2.webp", "../Proyectos/2f3.webp", "../Proyectos/2f4.webp", "../Proyectos/2f5.webp"],
+        "company": "Proyecto Freelance",
+        "category": "Iluminacion, Dialux evo, AutoCAD",
+        "description": "Se realizo el diseño de iluminación del escenario deportivo y pasos peatonales, perteneciente a la institución educativa Alfonso López Pumarejo sede divino niño de san José del Guaviare, se siguieron los lineamientos para escenarios deportivos que se encuentran en el RETILAP. "
+    },
+    {
+        "id": 1,
+        "name": "Diseño electrico y Fotometrico SENA Miraflores Guaviare",
+        "image": ["../Proyectos/1f1.webp", "../Proyectos/1f2.webp", "../Proyectos/1f3.webp", "../Proyectos/1f4.webp"],
+        "company": "Proyecto Freelance",
+        "category": "Iluminacion, Dialux evo, AutoCAD",
+        "description": "Se realizo el diseño eléctrico y de iluminación fotométrico con implantación de luminarias en AutoCAD, se entregaron memorias de cálculo RETILAP con especificaciones para centros educativos y memorias de cálculos eléctricos."
     }
     
    

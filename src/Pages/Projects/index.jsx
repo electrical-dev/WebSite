@@ -15,7 +15,7 @@ function Projects() {
   );
 
   return (
-    <div className=" bg-gradient-to-t from-slate-600 to-black ">
+    <div className=" bg-gradient-to-t from-slate-200 to-gray-800 ">
       <Layout>
         {/* <h1 className="felx justify-center text-xl md:text-2xl text-white font-semibold mb-2">
           Proyectos y experiencia laboral

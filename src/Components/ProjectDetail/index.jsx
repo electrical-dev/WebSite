@@ -25,7 +25,7 @@ const ProjectDetail = () => {
     <aside
       className={`${
         context.isProjectDetailOpen ? "flex" : "hidden"
-      } project-detail flex flex-col fixed items-center w-3/4 md:w-1/5 md:right-5 border border-orange-400 rounded-lg bg-gray-800 text-white overflow-y-auto h-3/4  `}
+      } project-detail flex flex-col fixed items-center w-3/4 md:w-1/5 lg:1/5 md:right-5 border border-orange-400 rounded-lg bg-gray-800 text-white overflow-y-auto h-3/4  `}
     >
       <div className="flex flex-row  justify-between w-full  p-6 ">
         <h2 className=" font-medium text-xl text-orange-600">Description</h2>
@@ -38,7 +38,10 @@ const ProjectDetail = () => {
         {fotos && fotos.length > 1 && (
           <Slider {...settings}>
             {fotos.map((image, index) => (
-              <div key={index} className="border border-spacing-10 rounded-sm">
+              <div
+                key={index}
+                className="border border-spacing-10 border-orange-400 rounded-sm"
+              >
                 <img src={image} alt={image} />
               </div>
             ))}
