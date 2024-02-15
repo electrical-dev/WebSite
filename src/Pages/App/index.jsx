@@ -10,6 +10,7 @@ import Calculator from "../Calculator";
 import NavBar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
 import "./App.css";
+import { Analytics } from "@vercel/analytics/react";
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -33,6 +34,7 @@ const App = () => {
           <NavBar />
           <Footer />
         </div>
+        <Analytics />
       </BrowserRouter>
     </CardProvider>
   );

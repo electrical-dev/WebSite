@@ -32,7 +32,7 @@ const Navbar = () => {
     { name: "ACERCA DE MI", link: "/about" },
     { name: "SERVICIOS", link: "/services" },
     { name: "PROYECTOS", link: "/projects" },
-    { name: "CONTACTAME", link: "/contact" },
+    { name: "CONTÁCTAME", link: "/contact" },
   ];
   let [isOpen, setIsOpen] = useState(false);
 
