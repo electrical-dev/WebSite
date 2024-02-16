@@ -18,18 +18,22 @@ function AboutMe() {
             visible: { opacity: 1, y: 0 },
           }}
         >
-          Soy un ingeniero electricista apasionado con experiencia en diseño
-          eléctrico, iluminación y seguridad electrónica. Graduado de la
-          Universidad Nacional de Colombia, estoy comprometido en brindar
-          soluciones eléctricas eficientes y de calidad. Mi enfoque se centra en
-          crear diseños, cumpliendo con normativas de seguridad y estándares.
-          Con experiencia en campo, comprendo los desafíos y complejidades de
-          implementación. Siempre busco superar expectativas y mantenerme
-          actualizado en las últimas tecnologías. <br />
+          Soy un ingeniero electricista graduado de la Universidad Nacional de
+          Colombia, con amplia experiencia en diseño eléctrico, iluminación y
+          seguridad electrónica. Mi pasión por la ingeniería me impulsa a
+          ofrecer soluciones innovadoras y eficientes, siempre cumpliendo con
+          las normativas de seguridad y los más altos estándares de calidad.
+          Comprendo los desafíos y complejidades de la implementación de
+          proyectos eléctricos, por lo que me enfoco en brindar un
+          acompañamiento cercano y personalizado a mis clientes. Mi objetivo es
+          superar las expectativas y construir relaciones duraderas basadas en
+          la confianza y la satisfacción. Me mantengo en constante actualización
+          con las últimas tecnologías del sector eléctrico, lo que me permite
+          ofrecer soluciones a la vanguardia del mercado. <br />
           <Link to="/contact">
             <span className=" text-orange-500 font-semibold text-xl cursor-pointer ">
-              ¡Contáctame para discutir cómo puedo ayudarte en tu próximo
-              proyecto!
+              Si buscas un ingeniero electricista comprometido, apasionado y con
+              experiencia, no dudes en contactarme.
             </span>
           </Link>
         </motion.p>
