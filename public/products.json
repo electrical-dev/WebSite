@@ -1,0 +1,92 @@
+[
+    {
+        "id": 10,
+        "name": "Diseño fotometrico Colegio",
+        "image": ["../Proyectos/ce5.webp","../Proyectos/ce1.webp","../Proyectos/ce2.webp","../Proyectos/ce3.webp","../Proyectos/ce4.webp"],
+        "company": "Freelance",
+        "category": "Diseño de iluminacion interior, exterior y emergencias. electricidad" ,
+        "description": "Se realiza el diseño fotometrico de salones de clases pasillos y areas comunes de colegio I.E. LaTorre Comez, municipio el retorno Guaviare."
+
+
+        
+    },
+    {
+        
+        "id": 9,
+        "name": "Documentacion y planimetria certificacion RETIE",
+        "image": ["../Proyectos/pe3.webp","../Proyectos/pe2.webp","../Proyectos/pe1.webp","../Proyectos/pe4.webp","../Proyectos/pe5.webp"],
+        "company": "Freelance-Trabajo para Jorge A Gomez y CIA  ",
+        "category": "electricidad" ,
+        "description": " Proyecto de cambio de planta eléctrica en Terminal Primax Puente Aranda: éxito en la certificación RETIE. Acompañamiento integral y resultados impecables. En este proyecto, brinde un acompañamiento completo al proceso de certificación:  Recopilación y análisis de información: Recopile toda la información técnica y legal relevante para el proyecto.   Memorias de cálculo: Realice las memorias de cálculo eléctrico para garantizar la seguridad y eficiencia de la nueva planta.    Planos AS-Built: Elabore planos detallados que documentan los cambios realizados en la instalación eléctrica.  Certificación RETIE: cumplimiento total de las normas.   Resultado: La empresa certificadora otorgó un dictamen positivo al proyecto, confirmando el cumplimiento total de las normas RETIE."
+    },
+    {
+        "id": 8,
+        "name": "Ingeniero de proyectos",
+        "image": ["../Proyectos/JAG1.webp"],
+        "company": "Experiencia Laboral: Jorge A. Gomez y CIA ",
+        "category": "Diseño electrico, AS-Built, AutoCAD, informes " ,
+        "description": "Principales funciones: Diseño eléctrico de instalaciones especiales en plantas de hidrocarburos. Residente en proyectos de implementación de telemetría en tanques de hidrocarburos, infraestructura eléctrica para moto-bombas, conexionado y control de equipos. Manejo de personal. Realización de informes de seguimiento de obra, cronogramas y planes de instalación de equipos. Cierres documentales y planos AS-built. Estudios electricos en campo: Telemetria y medicion de sistemas de puesta a tierra."
+    },
+   
+    {
+        "id": 7,
+        "name": "Ingeniero de proyectos - Residente",
+        "image": ["../Proyectos/eiasa.webp"],
+        "company": "Experiencia Laboral: Energia Integral Andina",
+        "category": "Manejo de personal, AutoCAD, " ,
+        "description": "Participacion en proyecto VIA 40 (Renovacion de infraestructura electrica y de datos Peaje Chusaca y Chinauta): Oficinas Unity Pereira ( Diseño electrico (Salidas electricas, iluminacion y HVAC), CCTV, Deteccion de incendios. Proyecto Datacenter 30MVA cliente BCEI, diseño de acometidas principales, sistema de potencia, infraestructura electrica, REVIT, metodologia BIM."
+    },
+    {
+        "id": 6,
+        "name": "Ingeniero de proyectos - Diseñador electricista",
+        "image": ["../Proyectos/JIC.webp"],
+        "company": " Experiencia Laboral: JIC Ingenieria",
+        "category": "Diseño electrico, AutoCAD, REVIT, Elecal " ,
+        "description": "Participacion en proyectos destacados: Oficinas Unity Pereira ( Diseño electrico (Salidas electricas, iluminacion y HVAC), CCTV, Deteccion de incendios. Proyecto Datacenter 30MVA cliente BCEI, diseño de acometidas principales, sistema de potencia, infraestructura electrica, REVIT, metodologia BIM."
+    },
+    {
+        "id": 5,
+        "name": "Supervisor Electricista",
+        "image": ["../Proyectos/Beumer1.webp"],
+        "company": "Experiencia Laboral: Beumer Group",
+        "category": "Aeropuerto el Dorado-Sistema de bandas trasnportadores de equipaje" ,
+        "description": " Supervision de personal de mantenimiento de bandas transportadoras de equipajes, programacion de manteniminetos con el area de operaciones del aeropuerto el Dorado."
+    },
+    
+    {
+        "id": 4,
+        "name": "Diseño electrico Hogar Gediatrico",
+        "image": ["../Proyectos/4f4.webp", "../Proyectos/4f3.webp", "../Proyectos/4f2.webp", "../Proyectos/4f1.webp"],
+        "company": "Proyecto Freelance",
+        "category": "Iluminacion, Dialux evo, AutoCAD",
+        "description": "Se realizo el diseño electrico y de iluminacion fotometrico con implantacion de luminarias en AutoCAD, se entregaron memorias de calculo RETILAP con especificaciones para centros educativos y memorias de calculos electricos."
+    },
+    {
+        "id": 3,
+        "name": "Diseño electrico y Fotometrico restaurante",
+        "image": ["../Proyectos/3f1.webp", "../Proyectos/3f2.webp", "../Proyectos/3f3.webp"],
+        "company": "Proyecto Freelance",
+        "category": "Iluminacion, Dialux evo, AutoCAD",
+        "description": "Se realizo el diseño eléctrico y de iluminación fotométrico con implantación de luminarias en AutoCAD de restaurante, se entregaron memorias de cálculo RETILAP con especificaciones memorias de cálculos eléctricos."
+    }
+    ,
+    {
+        "id": 2,
+        "name": "Diseño Fotometrico polideportivo de la Institución Educativa Alfonso López Pumarejo Sede Divino Niño",
+        "image": ["../Proyectos/2f1.webp", "../Proyectos/2f2.webp", "../Proyectos/2f3.webp", "../Proyectos/2f4.webp", "../Proyectos/2f5.webp"],
+        "company": "Proyecto Freelance",
+        "category": "Iluminacion, Dialux evo, AutoCAD",
+        "description": "Se realizo el diseño de iluminación del escenario deportivo y pasos peatonales, perteneciente a la institución educativa Alfonso López Pumarejo sede divino niño de san José del Guaviare, se siguieron los lineamientos para escenarios deportivos que se encuentran en el RETILAP. "
+    },
+    {
+        "id": 1,
+        "name": "Diseño electrico y Fotometrico SENA Miraflores Guaviare",
+        "image": ["../Proyectos/1f1.webp", "../Proyectos/1f2.webp", "../Proyectos/1f3.webp", "../Proyectos/1f4.webp"],
+        "company": "Proyecto Freelance",
+        "category": "Iluminacion, Dialux evo, AutoCAD",
+        "description": "Se realizo el diseño eléctrico y de iluminación fotométrico con implantación de luminarias en AutoCAD, se entregaron memorias de cálculo RETILAP con especificaciones para centros educativos y memorias de cálculos eléctricos."
+    }
+    
+   
+    
+]
