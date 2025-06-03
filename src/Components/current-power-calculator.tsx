@@ -233,7 +233,7 @@ export function CurrentPowerCalculator({ language }: { language: SupportedLangua
           </div>
         </div>
 
-        <div className="pt-2 flex space-x-4">
+        <div className="pt-2 flex sm:space-x-4 sm:flex-row flex-col sm:gap-4 gap-2">
           <Button onClick={calculatePower} className="flex-1">
             {content[language].calculatePower}
           </Button>

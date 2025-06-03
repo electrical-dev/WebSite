@@ -207,7 +207,7 @@ export function CableCalculator({ language }: { language: SupportedLanguage }) {
             </h3>
 
             {circuits.map((circuit, index) => (
-              <div key={index} className="grid grid-cols-12 gap-4 mb-4 items-end">
+              <div key={index} className="grid grid-cols-3 gap-1 mb-4 items-end sm:gap-4 sm:grid-cols-12">
                 <div className="col-span-4">
                   <Label>
                     {content[language].configuration}
@@ -269,7 +269,7 @@ export function CableCalculator({ language }: { language: SupportedLanguage }) {
               </div>
             ))}
 
-            <div className="flex space-x-4 mt-4">
+            <div className="flex mt-4 sm:space-x-4 sm:flex-row flex-col sm:gap-4 gap-2">
               <Button
                 variant="outline"
                 onClick={addCircuit}

@@ -46,7 +46,7 @@ export function ElectricalSection() {
         </h2>
 
         <Tabs defaultValue="current-power">
-          <TabsList className="grid grid-cols-5 mb-8">
+          <TabsList className="grid w-full h-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 mb-8">
             <TabsTrigger value="current-power">
               {content[language as SupportedLanguage].tabs.currentPower}
             </TabsTrigger>
