@@ -1,6 +1,0 @@
-.fondo-pantalla3 {
-  background-image: url("../../assets/bg-services.webp");
-  background-color: rgb(0, 0, 0);
-  background-repeat: no-repeat; /* Ajusta según tus preferencias */
-  min-height: 100vh; /* Esto asegura que el fondo cubra toda la altura de la ventana */
-}
