@@ -5,6 +5,7 @@ import { ExperienceSection } from "../Components/experience-section";
 import { HeroSection } from "../Components/hero-section";
 import { LanguageSwitcher } from "../Components/language-switcher";
 import { ProjectsSection } from "../Components/projects-section";
+import { YouTubeSection } from "../Components/youtube-section";
 
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <ElectricalSection />
+      <YouTubeSection />
       <ExperienceSection />
       <ProjectsSection />
       <ContactSection />
