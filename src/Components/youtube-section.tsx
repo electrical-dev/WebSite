@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion"
 import { Play, ExternalLink } from "lucide-react"
-import { useLanguage } from "../hooks/use-language"
 import { Card, CardContent } from "./ui/card"
+import { useLanguage } from "../hooks/use-language"
 
 export function YouTubeSection() {
   const { language } = useLanguage()

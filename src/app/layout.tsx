@@ -27,7 +27,7 @@ export default function RootLayout({
         <link rel="icon" href="/bombilla.webp" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <LanguageProvider>
             <div className="fixed top-4 right-4 z-50 flex flex-row items-center gap-2">
               <LanguageSwitcher />
