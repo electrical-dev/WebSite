@@ -20,6 +20,7 @@ import { Card, CardContent } from "./ui/card"
 import { Input } from "./ui/input"
 import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
+import emailjs from "@emailjs/browser"
 
 const TikTokIcon = () => (
   <svg
@@ -46,20 +47,46 @@ export function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
-    toast({
-      title: language === "es" ? "Mensaje enviado" : "Message sent",
-      description:
-        language === "es"
-          ? "Gracias por tu mensaje. Te responderé pronto."
-          : "Thank you for your message. I'll get back to you soon.",
-    })
+    const templateParams = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      subject: formData.get("subject") as string,
+      message: formData.get("message") as string,
+    };
 
-    setIsSubmitting(false)
-      ; (e.target as HTMLFormElement).reset()
+    // Reemplaza con tus IDs de EmailJS
+    const SERVICE_ID = "service_9x10c73";
+    const TEMPLATE_ID = "template_uuzcble";
+    const USER_ID = "qEbDODnyowVRQ-Am4"; // También conocido como Public Key en versiones más nuevas de EmailJS
+
+    try {
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID);
+      toast({
+        title: language === "es" ? "Mensaje enviado" : "Message sent",
+        description:
+          language === "es"
+            ? "Gracias por tu mensaje. Te responderé pronto."
+            : "Thank you for your message. I'll get back to you soon.",
+      });
+      form.reset();
+    } catch (error) {
+      console.error("Error al enviar el correo:", error);
+      toast({
+        title: language === "es" ? "Error al enviar" : "Failed to send",
+        description:
+          language === "es"
+            ? "Hubo un problema al enviar tu mensaje. Inténtalo de nuevo."
+            : "There was a problem sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
+
   return (
     <section className="py-20 bg-white dark:bg-gray-900">
       <div className="container px-4 mx-auto">
@@ -94,7 +121,7 @@ export function ContactSection() {
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       {language === "es" ? "Nombre" : "Name"}
                     </label>
-                    <Input id="name" required placeholder={language === "es" ? "Tu nombre" : "Your name"} />
+                    <Input id="name" name="name" required placeholder={language === "es" ? "Tu nombre" : "Your name"} />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -102,6 +129,7 @@ export function ContactSection() {
                     </label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
                       required
                       placeholder={language === "es" ? "tu@email.com" : "you@email.com"}
@@ -116,6 +144,7 @@ export function ContactSection() {
                     </label>
                     <Input
                       id="subject"
+                      name="subject"
                       required
                       placeholder={language === "es" ? "Asunto del mensaje" : "Message subject"}
                     />
@@ -129,6 +158,7 @@ export function ContactSection() {
                     </label>
                     <Textarea
                       id="message"
+                      name="message"
                       required
                       rows={5}
                       placeholder={language === "es" ? "Tu mensaje..." : "Your message..."}

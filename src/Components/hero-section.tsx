@@ -79,13 +79,13 @@ export function HeroSection() {
               onClick={scrollToElectricalTools}>
               {language === "es" ? "Herramientas eléctricas" : "Electrical Tools"}
             </Button>
-            <Button
+            {/*   <Button
               size="lg"
               variant="outline"
               className="border-orange-600 text-orange-600 hover:bg-orange-50 dark:border-orange-400 dark:text-orange-400 dark:hover:bg-orange-950/50"
             >
               {language === "es" ? "Descargar CV" : "Download Resume"}
-            </Button>
+            </Button> */}
 
           </div>
         </motion.div>
