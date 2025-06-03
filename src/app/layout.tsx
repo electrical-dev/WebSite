@@ -11,7 +11,9 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "David Avila - Electrical Engineer & Software Developer",
   description: "Portfolio of David Avila, Electrical Engineer and Software Developer",
-  generator: 'v0.dev'
+  icons: {
+    icon: '/bombilla.webp',
+  }
 }
 
 export default function RootLayout({
@@ -21,6 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/bombilla.webp" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
