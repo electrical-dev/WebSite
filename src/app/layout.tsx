@@ -6,6 +6,7 @@ import { Toaster } from "../Components/ui/toaster"
 import { ThemeToggle } from "../Components/theme-toggle"
 import "../app/globals.css"
 import { LanguageSwitcher } from "../Components/language-switcher"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
@@ -37,6 +38,7 @@ export default function RootLayout({
             <Toaster />
           </LanguageProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
