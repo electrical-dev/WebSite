@@ -11,9 +11,9 @@ export function VoltageDrop({ language }: { language: SupportedLanguage }) {
   const content = {
     es: {
       title: "Calculadora de Caída de Tensión",
-      voltage: "Tensión (V)",
-      current: "Corriente (A)",
-      length: "Longitud del Cable (m)",
+      voltage: "Tensión (V) *",
+      current: "Corriente (A) *",
+      length: "Longitud del Cable (m) *",
       material: "Material del Conductor",
       copper: "Cobre",
       aluminum: "Aluminio",
@@ -27,13 +27,20 @@ export function VoltageDrop({ language }: { language: SupportedLanguage }) {
       calculate: "Calcular Caída de Tensión",
       acceptable: "Caída aceptable (< 3%)",
       warning: "Caída elevada (3-5%)",
-      critical: "Caída crítica (> 5%)"
+      critical: "Caída crítica (> 5%)",
+      requiredField: "Campo obligatorio",
+      invalidVoltage: "La tensión debe ser mayor a 0",
+      invalidCurrent: "La corriente debe ser mayor a 0",
+      invalidLength: "La longitud debe ser mayor a 0",
+      voltageHelp: "Ej: 120, 220, 380, 480",
+      currentHelp: "Corriente que circula por el cable",
+      lengthHelp: "Distancia total del cable"
     },
     en: {
       title: "Voltage Drop Calculator",
-      voltage: "Voltage (V)",
-      current: "Current (A)",
-      length: "Cable Length (m)",
+      voltage: "Voltage (V) *",
+      current: "Current (A) *",
+      length: "Cable Length (m) *",
       material: "Conductor Material",
       copper: "Copper",
       aluminum: "Aluminum",
@@ -47,7 +54,14 @@ export function VoltageDrop({ language }: { language: SupportedLanguage }) {
       calculate: "Calculate Voltage Drop",
       acceptable: "Acceptable drop (< 3%)",
       warning: "High drop (3-5%)",
-      critical: "Critical drop (> 5%)"
+      critical: "Critical drop (> 5%)",
+      requiredField: "Required field",
+      invalidVoltage: "Voltage must be greater than 0",
+      invalidCurrent: "Current must be greater than 0",
+      invalidLength: "Length must be greater than 0",
+      voltageHelp: "Ex: 120, 220, 380, 480",
+      currentHelp: "Current flowing through the cable",
+      lengthHelp: "Total cable distance"
     }
   };
 
@@ -60,6 +74,13 @@ export function VoltageDrop({ language }: { language: SupportedLanguage }) {
   const [phase, setPhase] = useState("3");
   const [voltageDrop, setVoltageDrop] = useState<number | null>(null);
   const [percentageDrop, setPercentageDrop] = useState<number | null>(null);
+
+  // Validation states
+  const [errors, setErrors] = useState<{
+    voltage?: string;
+    current?: string;
+    length?: string;
+  }>({});
 
   // Resistivity (ohm-circular mil per foot)
   const resistivity = {
@@ -92,10 +113,42 @@ export function VoltageDrop({ language }: { language: SupportedLanguage }) {
     "1000": 1000000
   };
 
+  // Validation function
+  const validateInputs = (): boolean => {
+    const newErrors: typeof errors = {};
+
+    // Validate voltage
+    const voltageValue = parseFloat(voltage);
+    if (!voltage) {
+      newErrors.voltage = content[language].requiredField;
+    } else if (isNaN(voltageValue) || voltageValue <= 0) {
+      newErrors.voltage = content[language].invalidVoltage;
+    }
+
+    // Validate current
+    const currentValue = parseFloat(current);
+    if (!current) {
+      newErrors.current = content[language].requiredField;
+    } else if (isNaN(currentValue) || currentValue <= 0) {
+      newErrors.current = content[language].invalidCurrent;
+    }
+
+    // Validate length
+    const lengthValue = parseFloat(length);
+    if (!length) {
+      newErrors.length = content[language].requiredField;
+    } else if (isNaN(lengthValue) || lengthValue <= 0) {
+      newErrors.length = content[language].invalidLength;
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   // Calculate the voltage drop
   const calculateVoltageDrop = () => {
-    if (!voltage || !current || !length || !size) {
-      alert(language === "es" ? "Por favor complete todos los campos" : "Please fill in all fields");
+    // Validate inputs first
+    if (!validateInputs()) {
       return;
     }
 
@@ -153,51 +206,96 @@ export function VoltageDrop({ language }: { language: SupportedLanguage }) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {/* Left Column */}
-          <div className="space-y-4">
+          <div className="space-y-1">
             <div>
-              <Label htmlFor="voltage">
+              <Label htmlFor="voltage" className="flex items-center">
                 {content[language].voltage}
+                <span className="text-red-500 ml-1">*</span>
+                <div className="min-h-[1.25rem] mt-1">
+                  {errors.voltage && (
+                    <p className="text-red-500 text-xs">{errors.voltage}</p>
+                  )}
+                </div>
               </Label>
               <Input
                 id="voltage"
                 type="number"
+                min="0.1"
+                step="0.1"
                 value={voltage}
-                onChange={(e) => setVoltage(e.target.value)}
+                onChange={(e) => {
+                  setVoltage(e.target.value);
+                  if (errors.voltage) {
+                    setErrors(prev => ({ ...prev, voltage: undefined }));
+                  }
+                }}
                 placeholder="220"
+                className={errors.voltage ? "border-red-500" : ""}
               />
+              <p className="text-gray-500 text-xs mt-1">{content[language].voltageHelp}</p>
             </div>
 
             <div>
-              <Label htmlFor="current">
+              <Label htmlFor="current" className="flex items-center">
                 {content[language].current}
+                <span className="text-red-500 ml-1">*</span>
+                <div className="min-h-[1.25rem] mt-1">
+                  {errors.current && (
+                    <p className="text-red-500 text-xs">{errors.current}</p>
+                  )}
+                </div>
               </Label>
               <Input
                 id="current"
                 type="number"
+                min="0.1"
+                step="0.1"
                 value={current}
-                onChange={(e) => setCurrent(e.target.value)}
+                onChange={(e) => {
+                  setCurrent(e.target.value);
+                  if (errors.current) {
+                    setErrors(prev => ({ ...prev, current: undefined }));
+                  }
+                }}
                 placeholder="20"
+                className={errors.current ? "border-red-500" : ""}
               />
+              <p className="text-gray-500 text-xs mt-1">{content[language].currentHelp}</p>
             </div>
 
             <div>
-              <Label htmlFor="length">
+              <Label htmlFor="length" className="flex items-center">
                 {content[language].length}
+                <span className="text-red-500 ml-1">*</span>
+                <div className="min-h-[1.25rem] mt-1">
+                  {errors.length && (
+                    <p className="text-red-500 text-xs">{errors.length}</p>
+                  )}
+                </div>
               </Label>
               <Input
                 id="length"
                 type="number"
+                min="0.1"
+                step="0.1"
                 value={length}
-                onChange={(e) => setLength(e.target.value)}
+                onChange={(e) => {
+                  setLength(e.target.value);
+                  if (errors.length) {
+                    setErrors(prev => ({ ...prev, length: undefined }));
+                  }
+                }}
                 placeholder="50"
+                className={errors.length ? "border-red-500" : ""}
               />
+              <p className="text-gray-500 text-xs mt-1">{content[language].lengthHelp}</p>
             </div>
           </div>
 
           {/* Right Column */}
-          <div className="space-y-4">
+          <div className="space-y-1">
             <div>
               <Label htmlFor="material">
                 {content[language].material}
@@ -211,6 +309,7 @@ export function VoltageDrop({ language }: { language: SupportedLanguage }) {
                   <SelectItem value="aluminum">{content[language].aluminum}</SelectItem>
                 </SelectContent>
               </Select>
+              <div className="min-h-[1.25rem]"></div>
             </div>
 
             <div>
@@ -245,6 +344,7 @@ export function VoltageDrop({ language }: { language: SupportedLanguage }) {
                   <SelectItem value="1000">1000 kcmil</SelectItem>
                 </SelectContent>
               </Select>
+              <div className="min-h-[1.25rem]"></div>
             </div>
 
             <div>
@@ -260,6 +360,7 @@ export function VoltageDrop({ language }: { language: SupportedLanguage }) {
                   <SelectItem value="3">{content[language].threePhase}</SelectItem>
                 </SelectContent>
               </Select>
+              <div className="min-h-[1.25rem]"></div>
             </div>
           </div>
         </div>

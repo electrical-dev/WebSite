@@ -11,7 +11,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
   const content = {
     es: {
       title: "Dimensionamiento de Cable",
-      designCurrent: "Corriente de Diseño (A)",
+      designCurrent: "Corriente de Diseño (A) *",
       conductorMaterial: "Material del Conductor",
       copper: "Cobre",
       aluminum: "Aluminio",
@@ -27,7 +27,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       ladderTray: "Capa única sobre bandejas de escalera/bridas",
       inConduit: "En Tubería (NEC)",
       directBuried: "Enterrado Directo",
-      circuitCount: "Cantidad de Circuitos/Cables",
+      circuitCount: "Cantidad de Circuitos/Cables *",
       groupingFactor: "Factor de Agrupamiento",
       additionalFactor: "Factor Adicional (Manual)",
       adjustedCurrent: "Corriente Ajustada (A)",
@@ -38,11 +38,16 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       appliedStandards: "Normas y Factores Aplicados:",
       temperatureFactor: "Factor de corrección por temperatura:",
       groupingFactorApplied: "Factor de agrupamiento aplicado:",
-      additionalFactorApplied: "Factor adicional aplicado:"
+      additionalFactorApplied: "Factor adicional aplicado:",
+      requiredField: "Campo obligatorio",
+      invalidCurrent: "La corriente debe ser mayor a 0",
+      invalidCircuitCount: "La cantidad de circuitos debe ser mayor a 0",
+      invalidAdditionalFactor: "El factor adicional debe estar entre 0.1 y 1.0",
+      additionalFactorHelp: "Rango válido: 0.1 - 1.0"
     },
     en: {
       title: "Cable Sizing",
-      designCurrent: "Design Current (A)",
+      designCurrent: "Design Current (A) *",
       conductorMaterial: "Conductor Material",
       copper: "Copper",
       aluminum: "Aluminum",
@@ -58,7 +63,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       ladderTray: "Single layer on ladder trays/cable ties",
       inConduit: "In Conduit (NEC)",
       directBuried: "Direct Buried",
-      circuitCount: "Number of Circuits/Cables",
+      circuitCount: "Number of Circuits/Cables *",
       groupingFactor: "Grouping Factor",
       additionalFactor: "Additional Factor (Manual)",
       adjustedCurrent: "Adjusted Current (A)",
@@ -69,7 +74,12 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       appliedStandards: "Applied Standards and Factors:",
       temperatureFactor: "Temperature correction factor:",
       groupingFactorApplied: "Grouping factor applied:",
-      additionalFactorApplied: "Additional factor applied:"
+      additionalFactorApplied: "Additional factor applied:",
+      requiredField: "Required field",
+      invalidCurrent: "Current must be greater than 0",
+      invalidCircuitCount: "Circuit count must be greater than 0",
+      invalidAdditionalFactor: "Additional factor must be between 0.1 and 1.0",
+      additionalFactorHelp: "Valid range: 0.1 - 1.0"
     }
   };
 
@@ -89,6 +99,13 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
     additional: number;
     standard: string;
   } | null>(null);
+
+  // Validation states
+  const [errors, setErrors] = useState<{
+    current?: string;
+    circuitCount?: string;
+    additionalFactor?: string;
+  }>({});
 
   // Temperature correction factors
   const temperatureCorrectionFactors: Record<string, Record<string, number>> = {
@@ -110,27 +127,27 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
   const iecGroupingFactors: Record<string, Record<string, number>> = {
     // Agrupados en el aire, sobre una superficie, empotrados o en el interior de una envolvente
     "airGrouped": {
-      "1": 1.00, "2": 0.80, "3": 0.70, "4": 0.65, "5": 0.60, "6": 0.57, "7": 0.54,
+      "1": 1.00, "2": 0.80, "3": 0.70, "4": 0.65, "5": 0.60, "6": 0.57, "7": 0.54, 
       "8": 0.52, "9": 0.50, "12": 0.45, "16": 0.41, "20": 0.38
     },
     // Capa única sobre pared, suelo o sistemas de bandejas de cables sin perforar
     "singleLayerWall": {
-      "1": 1.00, "2": 0.85, "3": 0.79, "4": 0.75, "5": 0.73, "6": 0.72, "7": 0.72,
+      "1": 1.00, "2": 0.85, "3": 0.79, "4": 0.75, "5": 0.73, "6": 0.72, "7": 0.72, 
       "8": 0.71, "9": 0.70
     },
     // Capa única fijada directamente bajo techo de madera
     "singleLayerCeiling": {
-      "1": 0.95, "2": 0.81, "3": 0.72, "4": 0.68, "5": 0.66, "6": 0.64, "7": 0.63,
+      "1": 0.95, "2": 0.81, "3": 0.72, "4": 0.68, "5": 0.66, "6": 0.64, "7": 0.63, 
       "8": 0.62, "9": 0.61
     },
     // Capa única sobre sistemas de bandejas perforadas horizontales o verticales
     "perforatedTray": {
-      "1": 1.00, "2": 0.88, "3": 0.82, "4": 0.77, "5": 0.75, "6": 0.73, "7": 0.73,
+      "1": 1.00, "2": 0.88, "3": 0.82, "4": 0.77, "5": 0.75, "6": 0.73, "7": 0.73, 
       "8": 0.72, "9": 0.72
     },
     // Capa única sobre sistemas de bandejas de escalera, o bridas de amarre, etc.
     "ladderTray": {
-      "1": 1.00, "2": 0.87, "3": 0.82, "4": 0.80, "5": 0.80, "6": 0.79, "7": 0.79,
+      "1": 1.00, "2": 0.87, "3": 0.82, "4": 0.80, "5": 0.80, "6": 0.79, "7": 0.79, 
       "8": 0.78, "9": 0.78
     }
   };
@@ -193,6 +210,38 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
     }
   };
 
+  // Validation functions
+  const validateInputs = (): boolean => {
+    const newErrors: typeof errors = {};
+
+    // Validate current
+    const currentValue = parseFloat(current);
+    if (!current) {
+      newErrors.current = content[language].requiredField;
+    } else if (isNaN(currentValue) || currentValue <= 0) {
+      newErrors.current = content[language].invalidCurrent;
+    }
+
+    // Validate circuit count
+    const circuitCountValue = parseInt(circuitCount);
+    if (!circuitCount) {
+      newErrors.circuitCount = content[language].requiredField;
+    } else if (isNaN(circuitCountValue) || circuitCountValue <= 0) {
+      newErrors.circuitCount = content[language].invalidCircuitCount;
+    }
+
+    // Validate additional factor
+    const additionalFactorValue = parseFloat(additionalFactor);
+    if (additionalFactor && (!isNaN(additionalFactorValue))) {
+      if (additionalFactorValue < 0.1 || additionalFactorValue > 1.0) {
+        newErrors.additionalFactor = content[language].invalidAdditionalFactor;
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   // Get grouping factor based on installation type and circuit count
   const getGroupingFactor = (): { factor: number; standard: string } => {
     const count = parseInt(circuitCount);
@@ -234,6 +283,24 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
 
       return { factor: selectedFactor, standard: "IEC 60364-5-52 Tabla B.52.17" };
     }
+  };
+
+  // Function to get temperature correction factor
+  const getTemperatureCorrectionFactor = (): number => {
+    const tempTable = temperatureCorrectionFactors[temperature];
+    if (!tempTable) return 1.0;
+
+    const temps = Object.keys(tempTable).map(Number).sort((a, b) => a - b);
+    const ambientTempValue = parseFloat(ambientTemp);
+    let closestTemp = temps[0];
+
+    for (const temp of temps) {
+      if (Math.abs(temp - ambientTempValue) < Math.abs(closestTemp - ambientTempValue)) {
+        closestTemp = temp;
+      }
+    }
+
+    return tempTable[closestTemp.toString()] || 1.0;
   };
 
   // Calculate the adjusted current based on correction factors
@@ -279,7 +346,10 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
   };
 
   const calculateCableSize = () => {
-    if (!current) return;
+    // Validate inputs first
+    if (!validateInputs()) {
+      return;
+    }
 
     // Calculate adjusted current with correction factors
     const adjustedCurrentValue = calculateAdjustedCurrent() || parseFloat(current);
@@ -295,7 +365,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
     // Define the correct order of cable sizes from smallest to largest
     const cableSizeOrder = [
       "14", "12", "10", "8", "6", "4", "3", "2", "1",
-      "1/0", "2/0", "3/0", "4/0",
+      "1/0", "2/0", "3/0", "4/0", 
       "250", "300", "350", "400", "500", "600", "700", "750", "800", "900", "1000"
     ];
 
@@ -337,24 +407,6 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
     }
   };
 
-  // Function to get temperature correction factor
-  const getTemperatureCorrectionFactor = (): number => {
-    const tempTable = temperatureCorrectionFactors[temperature];
-    if (!tempTable) return 1.0;
-
-    const temps = Object.keys(tempTable).map(Number).sort((a, b) => a - b);
-    const ambientTempValue = parseFloat(ambientTemp);
-    let closestTemp = temps[0];
-
-    for (const temp of temps) {
-      if (Math.abs(temp - ambientTempValue) < Math.abs(closestTemp - ambientTempValue)) {
-        closestTemp = temp;
-      }
-    }
-
-    return tempTable[closestTemp.toString()] || 1.0;
-  };
-
   return (
     <Card>
       <CardHeader>
@@ -363,19 +415,34 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div className="space-y-1">
             <div>
-              <Label htmlFor="design-current">
+              <Label htmlFor="design-current" className="flex items-center">
                 {content[language].designCurrent}
+                <span className="text-red-500 ml-1">*</span>
+                <div className="min-h-[1.25rem] mt-1">
+                  {errors.current && (
+                    <p className="text-red-500 text-xs">{errors.current}</p>
+                  )}
+                </div>
               </Label>
               <Input
                 id="design-current"
                 type="number"
+                min="0.1"
+                step="0.1"
                 value={current}
-                onChange={(e) => setCurrent(e.target.value)}
+                onChange={(e) => {
+                  setCurrent(e.target.value);
+                  if (errors.current) {
+                    setErrors(prev => ({ ...prev, current: undefined }));
+                  }
+                }}
                 placeholder="25"
+                className={errors.current ? "border-red-500" : ""}
               />
+              <div className="min-h-[1.25rem]"></div>
             </div>
 
             <div>
@@ -391,6 +458,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
                   <SelectItem value="aluminum">{content[language].aluminum}</SelectItem>
                 </SelectContent>
               </Select>
+              <div className="min-h-[1.25rem]"></div>
             </div>
 
             <div>
@@ -407,6 +475,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
                   <SelectItem value="90">90°C</SelectItem>
                 </SelectContent>
               </Select>
+              <div className="min-h-[1.25rem]"></div>
             </div>
 
             <div>
@@ -436,6 +505,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
                   )}
                 </SelectContent>
               </Select>
+              <div className="min-h-[1.25rem]"></div>
             </div>
 
             <div>
@@ -449,10 +519,11 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
                 readOnly
                 className="bg-gray-50 dark:bg-gray-800"
               />
+              <div className="min-h-[1.25rem]"></div>
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-1">
             <div>
               <Label htmlFor="installation-type">
                 {content[language].installationType}
@@ -471,20 +542,34 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
                   <SelectItem value="buried">{content[language].directBuried}</SelectItem>
                 </SelectContent>
               </Select>
+              <div className="min-h-[1.25rem]"></div>
             </div>
 
             <div>
-              <Label htmlFor="circuit-count">
+              <Label htmlFor="circuit-count" className="flex items-center">
                 {content[language].circuitCount}
+                <span className="text-red-500 ml-1">*</span>
+                <div className="min-h-[1.25rem] mt-1">
+                  {errors.circuitCount && (
+                    <p className="text-red-500 text-xs">{errors.circuitCount}</p>
+                  )}
+                </div>
               </Label>
               <Input
                 id="circuit-count"
                 type="number"
                 min="1"
                 value={circuitCount}
-                onChange={(e) => setCircuitCount(e.target.value)}
+                onChange={(e) => {
+                  setCircuitCount(e.target.value);
+                  if (errors.circuitCount) {
+                    setErrors(prev => ({ ...prev, circuitCount: undefined }));
+                  }
+                }}
                 placeholder="3"
+                className={errors.circuitCount ? "border-red-500" : ""}
               />
+              <div className="min-h-[1.25rem]"></div>
             </div>
 
             <div>
@@ -498,11 +583,17 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
                 readOnly
                 className="bg-gray-50 dark:bg-gray-800"
               />
+              <div className="min-h-[1.25rem]"></div>
             </div>
 
             <div>
-              <Label htmlFor="additional-factor">
+              <Label htmlFor="additional-factor" className="flex items-center">
                 {content[language].additionalFactor}
+                <div className="min-h-[1.25rem] mt-1">
+                  {errors.additionalFactor && (
+                    <p className="text-red-500 text-xs">{errors.additionalFactor}</p>
+                  )}
+                </div>
               </Label>
               <Input
                 id="additional-factor"
@@ -511,9 +602,16 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
                 min="0.1"
                 max="1.0"
                 value={additionalFactor}
-                onChange={(e) => setAdditionalFactor(e.target.value)}
+                onChange={(e) => {
+                  setAdditionalFactor(e.target.value);
+                  if (errors.additionalFactor) {
+                    setErrors(prev => ({ ...prev, additionalFactor: undefined }));
+                  }
+                }}
                 placeholder="1.00"
+                className={errors.additionalFactor ? "border-red-500" : ""}
               />
+              <p className="text-gray-500 text-xs mt-1">{content[language].additionalFactorHelp}</p>
             </div>
 
             <div>
@@ -527,6 +625,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
                 readOnly
                 className="bg-gray-50 dark:bg-gray-800"
               />
+              <div className="min-h-[1.25rem]"></div>
             </div>
           </div>
         </div>
