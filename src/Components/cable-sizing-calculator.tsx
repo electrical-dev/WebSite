@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -30,7 +30,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       circuitCount: "Cantidad de Circuitos/Cables *",
       groupingFactor: "Factor de Agrupamiento",
       additionalFactor: "Factor Adicional (Manual)",
-      adjustedCurrent: "Corriente Ajustada (A)",
+      totalCombinedFactor: "Factor Total Combinado",
       calculateCableSize: "Calcular Tamaño de Cable",
       result: "Resultado:",
       recommendedCableSize: "Tamaño de cable recomendado:",
@@ -39,6 +39,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       temperatureFactor: "Factor de corrección por temperatura:",
       groupingFactorApplied: "Factor de agrupamiento aplicado:",
       additionalFactorApplied: "Factor adicional aplicado:",
+      baseAmpacity: "Ampacidad base del cable (sin factores):",
       requiredField: "Campo obligatorio",
       invalidCurrent: "La corriente debe ser mayor a 0",
       invalidCircuitCount: "La cantidad de circuitos debe ser mayor a 0",
@@ -66,7 +67,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       circuitCount: "Number of Circuits/Cables *",
       groupingFactor: "Grouping Factor",
       additionalFactor: "Additional Factor (Manual)",
-      adjustedCurrent: "Adjusted Current (A)",
+      totalCombinedFactor: "Total Combined Factor",
       calculateCableSize: "Calculate Cable Size",
       result: "Result:",
       recommendedCableSize: "Recommended cable size:",
@@ -75,6 +76,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       temperatureFactor: "Temperature correction factor:",
       groupingFactorApplied: "Grouping factor applied:",
       additionalFactorApplied: "Additional factor applied:",
+      baseAmpacity: "Cable base ampacity (without derating):",
       requiredField: "Required field",
       invalidCurrent: "Current must be greater than 0",
       invalidCircuitCount: "Circuit count must be greater than 0",
@@ -91,8 +93,9 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
   const [conductorMaterial, setConductorMaterial] = useState("copper");
   const [circuitCount, setCircuitCount] = useState("3");
   const [additionalFactor, setAdditionalFactor] = useState("1.00");
-  const [adjustedCurrent, setAdjustedCurrent] = useState("");
+  const [totalFactor, setTotalFactor] = useState("");
   const [deratedAmpacity, setDeratedAmpacity] = useState<number | null>(null);
+  const [baseAmpacity, setBaseAmpacity] = useState<number | null>(null);
   const [appliedFactors, setAppliedFactors] = useState<{
     temperature: number;
     grouping: number;
@@ -106,6 +109,11 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
     circuitCount?: string;
     additionalFactor?: string;
   }>({});
+
+  // Update total factor whenever relevant values change
+  useEffect(() => {
+    calculateFactors();
+  }, [temperature, ambientTemp, installationType, circuitCount, additionalFactor]);
 
   // Temperature correction factors
   const temperatureCorrectionFactors: Record<string, Record<string, number>> = {
@@ -303,12 +311,8 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
     return tempTable[closestTemp.toString()] || 1.0;
   };
 
-  // Calculate the adjusted current based on correction factors
-  const calculateAdjustedCurrent = () => {
-    if (!current) return;
-
-    const designCurrent = parseFloat(current);
-
+  // Calculate the total combined factor and store applied factors
+  const calculateFactors = () => {
     // Get temperature correction factor
     let tempFactor = 1.0;
     const tempTable = temperatureCorrectionFactors[temperature];
@@ -330,6 +334,9 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
     // Get additional factor
     const additionalFactorValue = parseFloat(additionalFactor) || 1.0;
 
+    // Calculate total combined factor
+    const totalCombinedFactor = tempFactor * groupingFactor * additionalFactorValue;
+
     // Store applied factors for display
     setAppliedFactors({
       temperature: tempFactor,
@@ -338,11 +345,10 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       standard: standard
     });
 
-    // Calculate the adjusted current
-    const adjusted = designCurrent / (tempFactor * groupingFactor * additionalFactorValue);
-    setAdjustedCurrent(adjusted.toFixed(2));
+    // Set total factor display
+    setTotalFactor(totalCombinedFactor.toFixed(2));
 
-    return adjusted;
+    return { totalCombinedFactor, tempFactor, groupingFactor, additionalFactorValue, standard };
   };
 
   const calculateCableSize = () => {
@@ -351,8 +357,9 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
       return;
     }
 
-    // Calculate adjusted current with correction factors
-    const adjustedCurrentValue = calculateAdjustedCurrent() || parseFloat(current);
+    // Calculate factors and adjusted current
+    const { totalCombinedFactor } = calculateFactors();
+    const adjustedCurrentValue = parseFloat(current) / totalCombinedFactor;
 
     // Get the appropriate ampacity table based on conductor material and temperature rating
     const ampacityValues = ampacityTable[conductorMaterial][temperature];
@@ -381,6 +388,9 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
         break;
       }
     }
+
+    // Store the base ampacity (without derating factors)
+    setBaseAmpacity(selectedAmpacity);
 
     // Calculate the derated ampacity for the selected cable
     const factors = appliedFactors || {
@@ -615,13 +625,13 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
             </div>
 
             <div>
-              <Label htmlFor="adjusted-current">
-                {content[language].adjustedCurrent}
+              <Label htmlFor="total-factor">
+                {content[language].totalCombinedFactor}
               </Label>
               <Input
-                id="adjusted-current"
+                id="total-factor"
                 type="text"
-                value={adjustedCurrent}
+                value={totalFactor}
                 readOnly
                 className="bg-gray-50 dark:bg-gray-800"
               />
@@ -646,6 +656,13 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
                 ? `Tamaño de cable recomendado: ${formatCableSize(cableSize)}`
                 : `Recommended cable size: ${formatCableSize(cableSize)}`}
             </p>
+            {baseAmpacity && (
+              <p className="mb-2">
+                {language === "es"
+                  ? `Ampacidad base del cable (sin factores): ${baseAmpacity} A`
+                  : `Cable base ampacity (without derating): ${baseAmpacity} A`}
+              </p>
+            )}
             {deratedAmpacity && (
               <p className="mb-4">
                 {language === "es"

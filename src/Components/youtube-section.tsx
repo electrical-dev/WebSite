@@ -28,25 +28,32 @@ export function YouTubeSection() {
   // Lista de tus videos de YouTube - reemplaza con tus URLs reales
   const youtubeVideos = [
     {
-      id: "1",
+      id: "2",
       videoId: "crPqqzqCUuc", // Reemplaza con tu video ID real
       title: language === "es" ? "Vale la pena estudiar ingenieria electrica?" : "Is it worth studying electrical engineering?",
       description: language === "es" ? "Descubre la verdad detrás de la carrera que promete un futuro brillante. David Avila, ingeniero eléctrico y desarrollador de software, te cuenta su historia sin filtros: expectativas vs. realidad, el duro mercado laboral y consejos clave para triunfar. ¿Vale la pena estudiar ingeniería eléctrica? La respuesta te sorprenderá. ¡No te lo pierdas!" : "Discover the truth behind the career that promises a bright future. David Avila, electrical engineer and software developer, tells you his story without filters: expectations vs. reality, the tough job market and key advice to succeed. Is it worth studying electrical engineering? The answer will surprise you. Don't miss it!",
       duration: "5:52",
     },
     {
-      id: "2",
+      id: "3",
       videoId: "z_eHDBkyie4", // Reemplaza con tu video ID real  
       title: language === "es" ? "Apagón Masivo en Europa: Análisis Técnico del Colapso Eléctrico" : "Mass blackout in Europe: Technical analysis of the electric collapse",
       description: language === "es" ? "Análisis técnico del gran apagón europeo" : "Technical analysis of the European blackout",
       duration: "4:14",
     },
     {
-      id: "3",
+      id: "4",
       videoId: "W2xrtHtyvQ4", // Reemplaza con tu video ID real
       title: language === "es" ? "Lo Que No Quieren Que Sepas de la Energía Nuclear ⚡🔥" : "What They Don't Want You to Know About Nuclear Energy ⚡🔥",
       description: language === "es" ? "Nos han hecho creer que la energía nuclear es peligrosa, inestable y que su mayor legado son los desastres como Chernobyl y Fukushima. Pero, ¿y si te dijera que la energía nuclear es en realidad la más eficiente, segura y sostenible que tenemos? 🌍⚡ Con tan solo unos gramos de combustible, una planta nuclear puede generar una cantidad de energía impresionante y abastecer ciudades enteras sin emisiones de CO₂. Además, América Latina ya cuenta con reactores en países como Argentina, Brasil y México. ¿Por qué seguimos temiéndole a la energía del futuro? 🔬☢️" : "They have made us believe that nuclear energy is dangerous, unstable and that its greatest legacy are disasters like Chernobyl and Fukushima. But what if I told you that nuclear energy is actually the most efficient, safe and sustainable energy we have? 🌍⚡ With just a few grams of fuel, a nuclear plant can generate an impressive amount of energy and supply entire cities without CO₂ emissions. In addition, Latin America already has reactors in countries like Argentina, Brazil and Mexico. Why do we still fear the future energy? 🔬☢️",
       duration: "1:27",
+    },
+    {
+      id: "1",
+      videoId: "Z-z2siWIr5Q", // Reemplaza con tu video ID real
+      title: language === "es" ? "Herramientas de calculos electricos gratis ⚡🔥" : "Free electrical calculation tools ⚡🔥",
+      description: language === "es" ? "Hoy te traigo 4 herramientas de calculos elesctricos totalmente gratis, faciles de usar y accesibles desde cualquier dispositivo movil o desde la web.  solo debes ingresar a este link: https://david-avila-elec.vercel.app/ , podras calcular corriente y potencia, caida de tension, calcular calibre de cable a utilizar, calcular ducteria y como extra calcular materiales de cableado. Sigueme y ayudame a construir una herramienta mas potente. Ademas, escribeme si me quieres apoyar. ⚡�" : "I bring you 4 free electrical calculation tools, easy to use and accessible from any mobile device or web.  just enter this link: https://david-avila-elec.vercel.app/ , you can calculate current and power, voltage drop, calculate cable size to use, calculate ducting and as extra calculate cable materials. Follow me and help me build a more powerful tool. Also, write me if you want to support me. ⚡�",
+      duration: "1113",
     },
   ]
 
