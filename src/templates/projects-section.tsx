@@ -4,8 +4,8 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Badge, ExternalLink, Github, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { useLanguage } from "../hooks/use-language"
-import { Button } from "./ui/button"
-import { Card, CardFooter, CardContent } from "./ui/card"
+import { Button } from "../Components/ui/button"
+import { Card, CardFooter, CardContent } from "../Components/ui/card"
 
 // Define the Project type
 interface Project {
