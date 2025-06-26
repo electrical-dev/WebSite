@@ -25,7 +25,6 @@ export function ElectricalSection() {
         voltageDrop: "Caída de Tensión",
         conduitSizing: "Dimensionamiento de Ducteria",
         cableCalculator: "Cálculo de Cableado",
-        loadSchedule: "Programa de Carga"
       }
     },
     en: {
@@ -36,7 +35,6 @@ export function ElectricalSection() {
         voltageDrop: "Voltage Drop",
         conduitSizing: "Conduit Sizing",
         cableCalculator: "Cable Calculator",
-        loadSchedule: "Load Schedule"
       }
     }
   };
@@ -65,9 +63,6 @@ export function ElectricalSection() {
             <TabsTrigger value="cable-calculator">
               {content[language as SupportedLanguage].tabs.cableCalculator}
             </TabsTrigger>
-            <TabsTrigger value="load-schedule">
-              {content[language as SupportedLanguage].tabs.loadSchedule}
-            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="current-power">
@@ -90,9 +85,6 @@ export function ElectricalSection() {
             <CableCalculator language={language as SupportedLanguage} />
           </TabsContent>
 
-          <TabsContent value="load-schedule">
-            <LoadSchedule language={language as SupportedLanguage} />
-          </TabsContent>
         </Tabs>
       </div>
     </section>

@@ -48,7 +48,7 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
       power: 0,
       quantity: 1,
       voltage: getCircuitVoltage("monofasico"),
-      powerFactor: 0.85,
+      powerFactor: 1,
       temperature: temperature,
       length: 20 // Longitud por defecto de 20 metros
     };
@@ -592,7 +592,7 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
                         max="1.0"
                         value={circuit.powerFactor}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateCircuit(circuit.id, "powerFactor", Number(e.target.value))}
-                        className="w-12"
+                        className="w-18"
                       />
                     </TableCell>
                     <TableCell>

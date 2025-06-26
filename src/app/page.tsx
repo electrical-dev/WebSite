@@ -1,5 +1,6 @@
 import { AboutSection } from "../templates/about-section";
 import { ContactSection } from "../templates/contact-section";
+import { ElectricalLoadCalculationsSection } from "../templates/electrical-load-calculations-section";
 import { ElectricalSection } from "../templates/electrical-section";
 import { ExperienceSection } from "../templates/experience-section";
 import { HeroSection } from "../templates/hero-section";
@@ -13,6 +14,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <ElectricalSection />
+      <ElectricalLoadCalculationsSection />
       <YouTubeSection />
       <ExperienceSection />
       <ProjectsSection />

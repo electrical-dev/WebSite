@@ -7,6 +7,7 @@ import { Toaster } from "../Components/ui/toaster"
 import { LanguageSwitcher } from "../Components/language-switcher"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Metadata } from "next"
+import { ThemeToggle } from "../Components/theme-toggle"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -33,6 +34,7 @@ export default function RootLayout({
           <LanguageProvider>
             <div className="fixed top-4 right-4 z-50 flex flex-row items-center gap-2">
               <LanguageSwitcher />
+              <ThemeToggle />
             </div>
             {children}
             <Toaster />
