@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Label } from "./ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Card, CardHeader, CardTitle, CardContent } from "../Components/ui/card";
+import { Input } from "../Components/ui/input";
+import { Button } from "../Components/ui/button";
+import { Label } from "../Components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../Components/ui/select";
 
 type SupportedLanguage = "en" | "es";
 
@@ -266,7 +266,7 @@ export function CurrentPowerCalculator({ language }: { language: SupportedLangua
             <div>
               <Label htmlFor="current">
                 <div className="flex items-center">
-                {content[language].nominalCurrent}
+                  {content[language].nominalCurrent}
                   <div className="min-h-[1.25rem] mt-1">
                     {errors.current && (
                       <p className="text-red-500 text-xs">{errors.current}</p>
@@ -320,7 +320,7 @@ export function CurrentPowerCalculator({ language }: { language: SupportedLangua
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <Label htmlFor="power-unit">
-                  {content[language].powerUnit} 
+                  {content[language].powerUnit}
                 </Label>
                 <Select value={powerUnit} onValueChange={setPowerUnit}>
                   <SelectTrigger id="power-unit">
@@ -337,7 +337,7 @@ export function CurrentPowerCalculator({ language }: { language: SupportedLangua
                 <div className="flex items-center">
                   <Label htmlFor="power">
                     {content[language].powerValue}
-                </Label>
+                  </Label>
                   <div className="min-h-[1.25rem] mt-1">
                     {errors.power && (
                       <p className="text-red-500 text-xs">{errors.power}</p>

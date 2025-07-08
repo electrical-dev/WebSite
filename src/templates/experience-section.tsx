@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Briefcase, Calendar } from "lucide-react"
 import { useLanguage } from "../hooks/use-language"
-import { Card, CardContent } from "./ui/card"
+import { Card, CardContent } from "../Components/ui/card"
 
 export function ExperienceSection() {
   const { language } = useLanguage()

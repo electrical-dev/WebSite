@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Label } from "./ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Card, CardHeader, CardTitle, CardContent } from "../Components/ui/card";
+import { Input } from "../Components/ui/input";
+import { Button } from "../Components/ui/button";
+import { Label } from "../Components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../Components/ui/select";
 
 type SupportedLanguage = "en" | "es";
 
@@ -135,27 +135,27 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
   const iecGroupingFactors: Record<string, Record<string, number>> = {
     // Agrupados en el aire, sobre una superficie, empotrados o en el interior de una envolvente
     "airGrouped": {
-      "1": 1.00, "2": 0.80, "3": 0.70, "4": 0.65, "5": 0.60, "6": 0.57, "7": 0.54, 
+      "1": 1.00, "2": 0.80, "3": 0.70, "4": 0.65, "5": 0.60, "6": 0.57, "7": 0.54,
       "8": 0.52, "9": 0.50, "12": 0.45, "16": 0.41, "20": 0.38
     },
     // Capa única sobre pared, suelo o sistemas de bandejas de cables sin perforar
     "singleLayerWall": {
-      "1": 1.00, "2": 0.85, "3": 0.79, "4": 0.75, "5": 0.73, "6": 0.72, "7": 0.72, 
+      "1": 1.00, "2": 0.85, "3": 0.79, "4": 0.75, "5": 0.73, "6": 0.72, "7": 0.72,
       "8": 0.71, "9": 0.70
     },
     // Capa única fijada directamente bajo techo de madera
     "singleLayerCeiling": {
-      "1": 0.95, "2": 0.81, "3": 0.72, "4": 0.68, "5": 0.66, "6": 0.64, "7": 0.63, 
+      "1": 0.95, "2": 0.81, "3": 0.72, "4": 0.68, "5": 0.66, "6": 0.64, "7": 0.63,
       "8": 0.62, "9": 0.61
     },
     // Capa única sobre sistemas de bandejas perforadas horizontales o verticales
     "perforatedTray": {
-      "1": 1.00, "2": 0.88, "3": 0.82, "4": 0.77, "5": 0.75, "6": 0.73, "7": 0.73, 
+      "1": 1.00, "2": 0.88, "3": 0.82, "4": 0.77, "5": 0.75, "6": 0.73, "7": 0.73,
       "8": 0.72, "9": 0.72
     },
     // Capa única sobre sistemas de bandejas de escalera, o bridas de amarre, etc.
     "ladderTray": {
-      "1": 1.00, "2": 0.87, "3": 0.82, "4": 0.80, "5": 0.80, "6": 0.79, "7": 0.79, 
+      "1": 1.00, "2": 0.87, "3": 0.82, "4": 0.80, "5": 0.80, "6": 0.79, "7": 0.79,
       "8": 0.78, "9": 0.78
     }
   };
@@ -372,7 +372,7 @@ export function CableSizingCalculator({ language }: { language: SupportedLanguag
     // Define the correct order of cable sizes from smallest to largest
     const cableSizeOrder = [
       "14", "12", "10", "8", "6", "4", "3", "2", "1",
-      "1/0", "2/0", "3/0", "4/0", 
+      "1/0", "2/0", "3/0", "4/0",
       "250", "300", "350", "400", "500", "600", "700", "750", "800", "900", "1000"
     ];
 

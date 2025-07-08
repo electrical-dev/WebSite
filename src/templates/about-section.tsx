@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { Cpu, Code, Zap, Lightbulb } from "lucide-react"
 import { useLanguage } from "../hooks/use-language"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs"
-import { Card, CardContent } from "./ui/card"
+import { Card, CardContent } from "../Components/ui/card"
 
 export function AboutSection() {
   const { language } = useLanguage()

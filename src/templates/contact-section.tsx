@@ -16,10 +16,10 @@ import {
 } from "lucide-react"
 import { useLanguage } from "../hooks/use-language"
 import { toast } from "../hooks/use-toast"
-import { Card, CardContent } from "./ui/card"
-import { Input } from "./ui/input"
-import { Textarea } from "./ui/textarea"
-import { Button } from "./ui/button"
+import { Card, CardContent } from "../Components/ui/card"
+import { Input } from "../Components/ui/input"
+import { Textarea } from "../Components/ui/textarea"
+import { Button } from "../Components/ui/button"
 import emailjs from "@emailjs/browser"
 
 const TikTokIcon = () => (

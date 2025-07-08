@@ -1,17 +1,19 @@
 import type React from "react"
 import { Inter } from "next/font/google"
+import "./globals.css"
 import { ThemeProvider } from "../Components/theme-provider"
 import { LanguageProvider } from "../hooks/use-language"
 import { Toaster } from "../Components/ui/toaster"
-import { ThemeToggle } from "../Components/theme-toggle"
-import "../app/globals.css"
 import { LanguageSwitcher } from "../Components/language-switcher"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import type { Metadata } from "next"
+import { ThemeToggle } from "../Components/theme-toggle"
+
 const inter = Inter({ subsets: ["latin"] })
 
-export const metadata = {
-  title: "David Avila - Electrical Engineer & Software Developer",
-  description: "Portfolio of David Avila, Electrical Engineer and Software Developer",
+export const metadata: Metadata = {
+  title: "Electrical Calculators",
+  description: "Calculadoras eléctricas para profesionales",
   icons: {
     icon: '/bombilla.webp',
   }
@@ -19,9 +21,9 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -37,6 +39,19 @@ export default function RootLayout({
             {children}
             <Toaster />
           </LanguageProvider>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (async () => {
+                  try {
+                    await fetch('/api/visit', { method: 'POST' });
+                  } catch (error) {
+                    console.error('Error recording visit:', error);
+                  }
+                })();
+              `,
+            }}
+          />
         </ThemeProvider>
         <SpeedInsights />
       </body>
