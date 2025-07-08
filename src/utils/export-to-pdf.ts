@@ -174,140 +174,277 @@ export function exportToPDF(data: ExportData) {
   doc.save(`${t.title}.pdf`);
 }
 
-export function exportLoadScheduleToPDF(data: any, language: SupportedLanguage, extras?: { panelType: "monofasico" | "bifasico" | "trifasico"; panelCapacity: number; serviceCurrent: number; serviceWire: string | null; groundWire: string | null; serviceConduit: string | null; serviceVoltageDrop: number; }) {
+export function exportLoadScheduleToPDF(
+  data: any,
+  language: SupportedLanguage,
+  extras?: {
+    panelType: "monofasico" | "bifasico" | "trifasico";
+    panelCapacity: number;
+    serviceCurrent: number;
+    serviceWire: string | null;
+    groundWire: string | null;
+    serviceConduit: string | null;
+    serviceVoltageDrop: number;
+    projectName?: string;
+    panelLocation?: string;
+    panelName?: string;
+  }
+) {
   const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-  const title = language === "es" ? "Cuadro de Cargas" : "Load Schedule";
   const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 15;
+  const contentWidth = pageWidth - (2 * margin);
 
-  // Título
-  doc.setFontSize(20);
-  doc.text(title, pageWidth / 2, 20, { align: "center" });
+  // Paleta de colores
+  const colors = {
+    orange: [249, 115, 22] as [number, number, number], // #F97316
+    gray: [107, 114, 128] as [number, number, number], // #6B7280
+    black: [0, 0, 0] as [number, number, number],
+    // Para balance de fases
+    blue: [59, 130, 246] as [number, number, number],
+    warning: [251, 146, 60] as [number, number, number],
+    danger: [239, 68, 68] as [number, number, number],
+  };
 
-  // ====== Bloque RESUMEN Tablero + Acometida ======
-  let nextY = 30;
+  // Título principal
+  const title = language === "es" ? "Cuadro de Cargas" : "Load Schedule";
+  const projectName = extras?.projectName || "";
+  const panelLocation = extras?.panelLocation || "";
+  const panelName = extras?.panelName || "";
+  doc.setFontSize(18);
+  doc.setFont("helvetica", 'bold');
+  doc.setTextColor(...colors.orange);
+  doc.text(title, margin, 20, { align: "left" });
+  
+  // Agregar "Por David Avila" en la esquina superior derecha
+  doc.setFontSize(10);
+  doc.setFont("helvetica", 'normal');
+  doc.setTextColor(...colors.gray);
+  doc.text("Por David Avila", pageWidth - margin, 15, { align: "right" });
+  
+  let currentY = 20;
+  doc.setFont("helvetica", 'normal');
+  doc.setTextColor(...colors.black);
 
-  const mainSummary: any[] = [
-    [language === "es" ? "Potencia Total" : "Total Power", `${data.totalPower.toFixed(0)} W`],
-    [language === "es" ? "Corriente Total" : "Total Current", `${data.totalCurrent.toFixed(2)} A`]
+  // Información del proyecto debajo del título
+  if (projectName || panelLocation || panelName) {
+    doc.setFontSize(8);
+    doc.setTextColor(...colors.gray);
+    if (projectName) {
+      doc.text((language === "es" ? "Proyecto: " : "Project: ") + projectName, margin, currentY + 6);
+      currentY += 4;
+    }
+    if (panelLocation) {
+      doc.text((language === "es" ? "Área: " : "Area: ") + panelLocation, margin, currentY + 6);
+      currentY += 4;
+    }
+    if (panelName) {
+      doc.text((language === "es" ? "Tablero: " : "Panel: ") + panelName, margin, currentY + 6);
+      currentY += 4;
+    }
+    doc.setTextColor(...colors.black);
+  }
+  currentY += 10; // Espacio después de info proyecto
+
+  // ====== SECCIÓN 1: RESUMEN DEL TABLERO ======
+  doc.setFontSize(10);
+  doc.setFont("helvetica", 'bold');
+  doc.setTextColor(...colors.black);
+  doc.text(language === "es" ? "Resumen del Tablero" : "Panel Summary", margin, currentY);
+  currentY += 6;
+  doc.setFont("helvetica", 'normal');
+  doc.setTextColor(...colors.black);
+
+  // Caída de tensión total (mayor)
+  const maxVoltageDrop = data.circuits && data.circuits.length > 0
+    ? Math.max(...data.circuits.map((c: any) => c.voltageDrop || 0)) + (extras?.serviceVoltageDrop || 0)
+    : 0;
+
+  const summaryItems = [
+    { label: language === "es" ? "Circuitos" : "Circuits", value: (data.circuits.length || 0).toString(), color: colors.gray },
+    { label: language === "es" ? "Potencia" : "Power", value: `${data.totalPower?.toFixed?.(0) || "0"} W`, color: colors.orange },
+    { label: language === "es" ? "Corriente" : "Current", value: `${data.totalCurrent?.toFixed?.(1) || "0.0"} A`, color: colors.orange },
+    { label: language === "es" ? "Mayor Caída de Tensión" : "Max Voltage Drop", value: `${maxVoltageDrop.toFixed(2)} %`, color: colors.orange }
   ];
+  const itemWidth = contentWidth / summaryItems.length;
+  const summaryBlockHeight = 14;
+  summaryItems.forEach((item, index) => {
+    const x = margin + (index * itemWidth) + 10;
+    const y = currentY + 3;
+    doc.setFontSize(10);
+    doc.setFont("helvetica", 'bold');
+    doc.setTextColor(...item.color);
+    doc.text(item.value || "", x + itemWidth/2, y, { align: 'center' });
+    doc.setFontSize(8);
+    doc.setFont("helvetica", 'normal');
+    doc.setTextColor(...colors.gray);
+    doc.text(item.label || "", x + itemWidth/2, y + 4, { align: 'center' });
+  });
+  currentY += summaryBlockHeight + 4;
 
+  // ====== SECCIÓN 2: INFORMACIÓN DE ACOMETIDA ======
+  doc.setFontSize(10);
+  doc.setFont("helvetica", 'bold');
+  doc.setTextColor(...colors.black);
+  doc.text(language === "es" ? "Información de Acometida" : "Service Information", margin, currentY);
+  currentY += 6;
+  doc.setFont("helvetica", 'normal');
+  doc.setTextColor(...colors.black);
   if (extras) {
+    const serviceItems = [
+      { label: language === "es" ? "Capacidad Tablero" : "Panel Capacity", value: `${extras.panelCapacity ?? ""} A` },
+      { label: language === "es" ? "Corriente Servicio" : "Service Current", value: `${extras.serviceCurrent?.toFixed?.(2) || "0.00"} A` },
+      { label: language === "es" ? "Cable Servicio" : "Service Wire", value: extras.serviceWire ?? "" },
+      { label: language === "es" ? "Ducto Servicio" : "Service Conduit", value: extras.serviceConduit ?? "" },
+      { label: language === "es" ? "Tierra" : "Ground", value: extras.groundWire ?? "" },
+      { label: language === "es" ? "Caída V Servicio" : "Service V Drop", value: `${extras.serviceVoltageDrop?.toFixed?.(2) || "0.00"} %` },
+    ];
     const formatService = (wire: string | null, ground: string | null, type: string) => {
       if (!wire || !ground) return "";
       if (type === "monofasico") return `1F#${wire}+1N#${wire}+1T#${ground}`;
       if (type === "bifasico") return `2F#${wire}+1N#${wire}+1T#${ground}`;
       return `3F#${wire}+1N#${wire}+1T#${ground}`;
     };
-
-    mainSummary.push(
-      [language === "es" ? "Capacidad Tablero" : "Panel Capacity", `${extras.panelCapacity} A`],
-      [language === "es" ? "Corriente Servicio" : "Service Current", `${extras.serviceCurrent.toFixed(2)} A`],
-      [language === "es" ? "Cable Servicio" : "Service Wire", extras.serviceWire ?? ""],
-      [language === "es" ? "Ducto Servicio" : "Service Conduit", extras.serviceConduit ?? ""],
-      [language === "es" ? "Tierra" : "Ground", extras.groundWire ?? ""],
-      [language === "es" ? "Caída V Servicio" : "Service V Drop", `${extras.serviceVoltageDrop.toFixed(2)} %`],
-      [language === "es" ? "Acometida Completa" : "Complete Wiring", formatService(extras.serviceWire, extras.groundWire, extras.panelType)]
-    );
+    const acometida = formatService(extras.serviceWire || "", extras.groundWire || "", extras.panelType || "");
+    if (acometida) {
+      serviceItems.push({
+        label: language === "es" ? "Acometida Principal" : "Main Service Line",
+        value: acometida,
+      });
+    }
+    const serviceItemWidth = contentWidth / serviceItems.length;
+    const acometidaBlockHeight = 14;
+    serviceItems.forEach((item, index) => {
+      const x = margin + (index * serviceItemWidth) + 5;
+      const y = currentY + 3;
+      doc.setFontSize(8);
+      doc.setTextColor(...colors.gray);
+      doc.text(item.label || "", x + serviceItemWidth/2, y, { align: 'center' });
+      doc.setFontSize(10);
+      doc.setFont("helvetica", 'bold');
+      doc.setTextColor(...colors.orange);
+      doc.text(item.value || "", x + serviceItemWidth/2, y + 4, { align: 'center' });
+      doc.setFont("helvetica", 'normal');
+      doc.setTextColor(...colors.black);
+    });
+    currentY += acometidaBlockHeight + 4;
   }
 
-  autoTable(doc, {
-    startY: nextY,
-    body: mainSummary,
-    theme: 'grid',
-    styles: { fontSize: 10 },
-    headStyles: { fillColor: [41, 128, 185], textColor: 255 }
-  });
+  // ====== SECCIÓN 3: BALANCE DE FASES ======
+  doc.setFontSize(10);
+  doc.setFont("helvetica", 'bold');
+  doc.setTextColor(...colors.black);
+  doc.text(language === "es" ? "Balance de Fases" : "Phase Balance", margin, currentY);
+  currentY += 6;
+  doc.setFont("helvetica", 'normal');
+  doc.setTextColor(...colors.black);
+  if (!(data.phaseBalance.B === 0 && data.phaseBalance.C === 0)) {
+    const maxCurrent = Math.max(data.phaseBalance.A || 0, data.phaseBalance.B || 0, data.phaseBalance.C || 0);
+    const phases = [
+      { name: language === "es" ? "Fase A (L1)" : "Phase A (L1)", current: data.phaseBalance.A || 0, color: colors.blue },
+      { name: language === "es" ? "Fase B (L2)" : "Phase B (L2)", current: data.phaseBalance.B || 0, color: colors.warning },
+      { name: language === "es" ? "Fase C (L3)" : "Phase C (L3)", current: data.phaseBalance.C || 0, color: colors.danger }
+    ];
+    const phaseBlockHeight = 8 * phases.filter(p => p.current > 0).length;
+    phases.forEach((phase, index) => {
+      if (phase.current > 0) {
+        const y = currentY + (index * 8);
+        doc.setFontSize(9);
+        doc.setTextColor(...colors.gray);
+        doc.text(phase.name || "", margin + 10, y);
+        doc.setFont("helvetica", 'bold');
+        doc.setTextColor(...phase.color);
+        doc.text(`${phase.current.toFixed(2)} A`, margin + 60, y);
+        // Barra de progreso
+        const progressWidth = 50;
+        const progressHeight = 4;
+        const progressX = margin + 80;
+        const progressY = y - 3;
+        doc.setFillColor(240, 240, 240);
+        doc.rect(progressX, progressY, progressWidth, progressHeight, 'F');
+        doc.setFillColor(...phase.color);
+        doc.rect(progressX, progressY, progressWidth * (maxCurrent ? (phase.current / maxCurrent) : 0), progressHeight, 'F');
+        doc.setDrawColor(200, 200, 200);
+        doc.rect(progressX, progressY, progressWidth, progressHeight, 'S');
+      }
+    });
+    doc.setFont("helvetica", 'normal');
+    doc.setTextColor(...colors.black);
+    currentY += phaseBlockHeight + 6;
+  }
 
-  nextY = (doc as any).lastAutoTable.finalY + 10;
-
-  // ====== Tabla de circuitos (todas las columnas de la UI) ======
-
-  // Tabla de circuitos (todas las columnas de la UI)
+  // ====== SECCIÓN 4: TABLA DE CIRCUITOS ======
+  doc.setFontSize(10);
+  doc.setFont("helvetica", 'bold');
+  doc.setTextColor(...colors.black);
+  doc.text(language === "es" ? "Cálculos Detallados de Circuitos" : "Detailed Circuit Calculations", margin, currentY);
+  currentY += 6;
+  doc.setFont("helvetica", 'normal');
+  doc.setTextColor(...colors.black);
   const circuitHeaders = [
     "#",
     language === "es" ? "Descripción" : "Description",
     language === "es" ? "Tipo" : "Type",
-    language === "es" ? "Tensión (V)" : "Voltage (V)",
-    language === "es" ? "Potencia (W)" : "Power (W)",
-    language === "es" ? "Corriente (A)" : "Current (A)",
-    "I×1.25 (A)",
+    language === "es" ? "Tensión" : "Voltage",
+    language === "es" ? "Potencia" : "Power",
+    language === "es" ? "Corriente" : "Current",
+    "I×1.25",
     language === "es" ? "Longitud (m)" : "Length (m)",
     language === "es" ? "Fase" : "Phase",
     language === "es" ? "Cableado" : "Wiring",
     language === "es" ? "Ducto" : "Conduit",
     language === "es" ? "Protección" : "Protection",
-    language === "es" ? "Caída V (%)" : "V Drop (%)",
-    language === "es" ? "Pérdidas (W)" : "Loss (W)"
+    language === "es" ? "Caída V" : "V Drop",
+    language === "es" ? "Pérdidas" : "Losses"
   ];
-
-  const circuitData = data.circuits.map((c, idx: number) => [
-    idx + 1,
-    c.description,
+  const formatProtection = (protection: string, type: string) => {
+    const amperage = protection.replace(/[^\d]/g, "");
+    if (type === "trifasico") return `3x${amperage}A`;
+    if (type === "bifasico") return `2x${amperage}A`;
+    return `1x${amperage}A`;
+  };
+  const circuitData = data.circuits.map((c: any, idx: number) => [
+    (idx + 1).toString(),
+    c.description || "",
     c.type === "trifasico" ? "3F" : c.type === "bifasico" ? "2F" : "1F",
-    c.voltage,
-    c.power.toFixed(0),
-    c.current.toFixed(2),
-    (c as any).currentWithFactor?.toFixed?.(2) ?? "",
-    (c as any).length ?? "",
-    c.phase,
-    (c as any).wireConfiguration ?? "",
-    (c as any).conduitSize ?? "",
-    c.protection,
-    (c as any).voltageDrop?.toFixed?.(2) ?? "",
-    (c as any).powerLoss?.toFixed?.(1) ?? ""
+    `${c.voltage || ""}V`,
+    `${c.power?.toFixed?.(0) || "0"}W`,
+    `${c.current?.toFixed?.(2) || "0.00"}A`,
+    `${c.currentWithFactor?.toFixed?.(2) || ""}A`,
+    c.length !== undefined && c.length !== null && c.length !== '' ? `${c.length}` : '',
+    c.phase || "",
+    c.wireConfiguration || "",
+    c.conduitSize || "",
+    formatProtection(c.protection || '', c.type || ''),
+    `${c.voltageDrop?.toFixed?.(2) || ""}%`,
+    `${c.powerLoss?.toFixed?.(1) || ""}W`
   ]);
-
   autoTable(doc, {
-    startY: nextY,
+    startY: currentY,
     head: [circuitHeaders],
     body: circuitData,
     theme: 'grid',
-    styles: { fontSize: 8 },
-    headStyles: { fillColor: [41, 128, 185], textColor: 255 }
+    styles: { 
+      fontSize: 7,
+      cellPadding: 1.5,
+      lineColor: [200, 200, 200],
+      lineWidth: 0.1
+    },
+    headStyles: { 
+      fillColor: colors.orange,
+      textColor: 255,
+      fontStyle: 'bold',
+      fontSize: 8
+    },
+    alternateRowStyles: {
+      fillColor: [248, 250, 252]
+    },
+    margin: { left: margin + 5, right: margin + 5 }
   });
-
-  // Resumen
-  const summaryY = (doc as any).lastAutoTable.finalY + 20;
-  doc.setFontSize(16);
-  doc.text(language === "es" ? "Resumen" : "Summary", pageWidth / 2, summaryY, { align: "center" });
-
-  // Datos del resumen
-  const summaryData = [
-    [
-      language === "es" ? "Caída de Tensión" : "Voltage Drop",
-      `${data.voltageDrop.toFixed(2)} V`
-    ],
-    [
-      language === "es" ? "Pérdidas de Potencia" : "Power Loss",
-      `${data.powerLoss.toFixed(2)} W`
-    ]
-  ];
-
-  autoTable(doc, {
-    startY: summaryY + 10,
-    body: summaryData,
-    theme: 'grid',
-    styles: { fontSize: 10 },
-    headStyles: { fillColor: [41, 128, 185] }
-  });
-
-  // Balance de fases solo si aplica
-  if (!(data.phaseBalance.B === 0 && data.phaseBalance.C === 0)) {
-    const phaseBalanceY = (doc as any).lastAutoTable.finalY + 20;
-    doc.setFontSize(16);
-    doc.text(language === "es" ? "Balance de Fases" : "Phase Balance", pageWidth / 2, phaseBalanceY, { align: "center" });
-
-    const phaseBalanceData: any[] = [];
-    phaseBalanceData.push(["A", `${data.phaseBalance.A.toFixed(2)} A`]);
-    if (data.phaseBalance.B > 0) phaseBalanceData.push(["B", `${data.phaseBalance.B.toFixed(2)} A`]);
-    if (data.phaseBalance.C > 0) phaseBalanceData.push(["C", `${data.phaseBalance.C.toFixed(2)} A`]);
-
-    autoTable(doc, {
-      startY: phaseBalanceY + 10,
-      body: phaseBalanceData,
-      theme: 'grid',
-      headStyles: { fillColor: [41, 128, 185], textColor: 255 }
-    });
+  // Actualiza currentY después de la tabla
+  if ((doc as any).lastAutoTable && (doc as any).lastAutoTable.finalY) {
+    currentY = (doc as any).lastAutoTable.finalY + 5;
   }
 
   // Guardar el PDF

@@ -38,6 +38,7 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
   const [temperature, setTemperature] = useState<number>(30);
   const [projectName, setProjectName] = useState<string>("");
   const [panelLocation, setPanelLocation] = useState<string>("");
+  const [panelName, setPanelName] = useState<string>(""); // NUEVO estado para el nombre del tablero
   const [serviceLength, setServiceLength] = useState<number>(50); // Longitud de la acometida principal en metros
 
   const addCircuit = () => {
@@ -84,12 +85,18 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
       serviceWire: serviceWireSize,
       groundWire: groundWireSize,
       serviceConduit: serviceConduitSize,
-      serviceVoltageDrop: serviceVoltageDropData.percentage
+      serviceVoltageDrop: serviceVoltageDropData.percentage,
     });
   };
 
   const handleExportPDF = () => {
-    const results = calculateLoadScheduleWithAutoPhases(circuits, calculatedPanelSize, voltage, temperature, panelType);
+    const results = calculateLoadScheduleWithAutoPhases(
+      circuits, // Usa los circuitos originales, no cambies el tipo de length
+      calculatedPanelSize,
+      voltage,
+      temperature,
+      panelType
+    );
     exportLoadScheduleToPDF(results, language, {
       panelType,
       panelCapacity: calculatedPanelSize,
@@ -97,8 +104,11 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
       serviceWire: serviceWireSize,
       groundWire: groundWireSize,
       serviceConduit: serviceConduitSize,
-      serviceVoltageDrop: serviceVoltageDropData.percentage
-    });
+      serviceVoltageDrop: serviceVoltageDropData.percentage,
+      projectName,
+      panelLocation,
+      panelName,
+    } as any);
   };
 
   // Obtener voltaje según el tipo de circuito y tablero
@@ -251,7 +261,7 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
         <h3 className="text-lg font-semibold mb-3">
           {language === "es" ? "Información del Proyecto" : "Project Information"}
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div>
             <Label htmlFor="projectName">
               {language === "es" ? "Nombre del Proyecto" : "Project Name"}
@@ -265,13 +275,24 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
           </div>
           <div>
             <Label htmlFor="panelLocation">
-              {language === "es" ? "Ubicación del Tablero" : "Panel Location"}
+              {language === "es" ? "Área o Ubicación" : "Area or Location"}
             </Label>
             <Input
               id="panelLocation"
               value={panelLocation}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPanelLocation(e.target.value)}
               placeholder={language === "es" ? "Ej: Planta Baja, Cuarto Eléctrico" : "Ex: Ground Floor, Electrical Room"}
+            />
+          </div>
+          <div>
+            <Label htmlFor="panelName">
+              {language === "es" ? "Nombre del Tablero" : "Panel Name"}
+            </Label>
+            <Input
+              id="panelName"
+              value={panelName}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPanelName(e.target.value)}
+              placeholder={language === "es" ? "Ej: TD-01, Tablero Principal" : "Ex: TD-01, Main Panel"}
             />
           </div>
         </div>
@@ -481,11 +502,11 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
               <TableRow>
                 <TableHead className="text-center w-12">#</TableHead>
                 <TableHead className="w-20">{language === "es" ? "Tipo" : "Type"}</TableHead>
-                <TableHead className="min-w-[200px]">{language === "es" ? "Descripción" : "Description"}</TableHead>
-                <TableHead className="text-center w-24">{language === "es" ? "Pot. Unit." : "Unit Pwr"}</TableHead>
+                <TableHead className="min-w-[150px]">{language === "es" ? "Descripción" : "Description"}</TableHead>
+                <TableHead className="text-center w-24">{language === "es" ? "Pot. Unit. (W)" : "Unit Pwr (W)"}</TableHead>
                 <TableHead className="text-center w-16">{language === "es" ? "Cant." : "Qty"}</TableHead>
                 <TableHead className="text-center w-24">{language === "es" ? "Pot. Total" : "Total Pwr"}</TableHead>
-                <TableHead className="text-center w-20">{language === "es" ? "Long." : "Length"}</TableHead>
+                <TableHead className="text-center w-20">{language === "es" ? "Long. (m)" : "Length (m)"}</TableHead>
                 <TableHead className="text-center w-16">F.P.</TableHead>
                 <TableHead className="text-center w-16">V</TableHead>
                 <TableHead className="text-center w-20">{language === "es" ? "Fase" : "Phase"}</TableHead>
@@ -548,16 +569,16 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
                         value={circuit.description}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateCircuit(circuit.id, "description", e.target.value)}
                         placeholder={language === "es" ? "Descripción del circuito" : "Circuit description"}
-                        className="min-w-[180px]"
+                        className="min-w-[130px]"
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         type="number"
-                        value={circuit.power}
+                        value={circuit.power === 0 ? "" : circuit.power}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateCircuit(circuit.id, "power", Number(e.target.value))}
                         className="w-20"
-                        placeholder="100"
+                        placeholder="0"
                       />
                     </TableCell>
                     <TableCell>
@@ -638,7 +659,7 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
             <h3 className="text-lg font-semibold mb-3">
               {language === "es" ? "📊 Resumen del Tablero" : "📊 Panel Summary"}
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               <div className="text-center p-3 bg-blue-50 rounded-lg">
                 <div className="text-xl font-bold text-blue-600">{results.circuits.length}</div>
                 <div className="text-xs text-blue-800">
@@ -656,13 +677,13 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
                 <div className="text-xs text-orange-800">
                   {language === "es" ? "Corriente" : "Current"}
                 </div>
-              </div>
+              </div>{/*
               <div className="text-center p-3 bg-purple-50 rounded-lg">
                 <div className="text-xl font-bold text-purple-600">{((results.totalCurrent / calculatedPanelSize) * 100).toFixed(1)}%</div>
                 <div className="text-xs text-purple-800">
                   {language === "es" ? "Carga" : "Load"}
                 </div>
-              </div>
+              </div> */}
             </div>
           </Card>
 
@@ -760,7 +781,7 @@ export function LoadSchedule({ language }: LoadScheduleProps) {
                         <TableCell className="text-center font-mono">{circuit.power.toFixed(0)} W</TableCell>
                         <TableCell className="text-center font-mono">{circuit.current.toFixed(2)} A</TableCell>
                         <TableCell className="text-center font-mono text-blue-600">{circuit.currentWithFactor.toFixed(2)} A</TableCell>
-                        <TableCell className="text-center">{circuits.find(c => c.id === circuit.id)?.length || 0} m</TableCell>
+                        <TableCell className="text-center">{circuits.find(c => c.id === circuit.id)?.length || 0}</TableCell>
                         <TableCell className="text-center">
                           {(() => {
                             let display: string;

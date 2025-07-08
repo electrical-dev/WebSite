@@ -39,6 +39,7 @@ interface LoadScheduleResult {
     quantity: number;
     phase: string;
     voltage: number;
+    length: number;
     current: number;
     currentWithFactor: number; // Corriente al 1.25 para mostrar en tabla
     wireSize: string;
@@ -446,6 +447,7 @@ export function calculateLoadSchedule(
       quantity: circuit.quantity,
       phase: circuit.phase,
       voltage: circuitVoltage, // Incluir el voltaje del circuito
+      length: circuit.length || 0, // AÑADIR ESTA LÍNEA
       current: current,
       currentWithFactor: currentWithFactor, // Corriente al 1.25 para mostrar en tabla
       wireSize: wireSize,
