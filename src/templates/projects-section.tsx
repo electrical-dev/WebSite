@@ -44,17 +44,17 @@ export function ProjectsSection() {
           id: item.id,
           title: {
             es: item.name,
-            en: item.name,
+            en: item.name, // TODO: Add English translations if needed
           },
           description: {
             es: item.description,
-            en: item.description,
+            en: item.description, // TODO: Add English translations if needed
           },
           images: item.image || [],
           company: item.company,
-          tags: item.category ? item.category.split(",").map((tag: string) => tag.trim()) : [],
-          category: item.tags?.includes("React") || item.tags?.includes("Node.js") ? "software" : item.tags?.includes("electricidad") || item.tags?.includes("ingenieria") ? "electrical" : "hybrid",
-          link: item.link || "#",
+          tags: item.tags || [],
+          category: item.category, // Directly from JSON
+          link: item.link,
           github: item.github,
         }))
         setAllProjects(mappedProjects)
@@ -79,13 +79,11 @@ export function ProjectsSection() {
       all: "Todos",
       electrical: "Ing. Eléctrica",
       software: "Desarrollo",
-      hybrid: "Híbridos",
     },
     en: {
       all: "All",
       electrical: "Electrical Eng.",
       software: "Development",
-      hybrid: "Hybrid",
     },
   }
 
