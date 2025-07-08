@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 import { useLanguage } from "../hooks/use-language"
-import { Button } from "./ui/button"
+import { Button } from "../Components/ui/button"
 
 
 export function HeroSection() {

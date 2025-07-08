@@ -2,12 +2,13 @@
 
 import React from "react";
 import { useLanguage } from "../hooks/use-language";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { CurrentPowerCalculator } from "./current-power-calculator";
-import { CableSizingCalculator } from "./cable-sizing-calculator";
-import { VoltageDrop } from "./voltage-drop";
-import { ConduitSizing } from "./conduit-sizing";
-import { CableCalculator } from "./cable-calculator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../Components/ui/tabs";
+import { CurrentPowerCalculator } from "../calculators/current-power-calculator";
+import { CableSizingCalculator } from "../calculators/cable-sizing-calculator";
+import { VoltageDrop } from "../calculators/voltage-drop";
+import { ConduitSizing } from "../calculators/conduit-sizing";
+import { CableCalculator } from "../calculators/cable-calculator";
+import { LoadSchedule } from "../calculators/load-schedule";
 
 // Define the language type
 type SupportedLanguage = "en" | "es";
@@ -23,7 +24,7 @@ export function ElectricalSection() {
         cableSizing: "Dimensionamiento de Cable",
         voltageDrop: "Caída de Tensión",
         conduitSizing: "Dimensionamiento de Ducteria",
-        cableCalculator: "Cálculo de Cableado"
+        cableCalculator: "Cálculo de Cableado",
       }
     },
     en: {
@@ -33,7 +34,7 @@ export function ElectricalSection() {
         cableSizing: "Cable Sizing",
         voltageDrop: "Voltage Drop",
         conduitSizing: "Conduit Sizing",
-        cableCalculator: "Cable Calculator"
+        cableCalculator: "Cable Calculator",
       }
     }
   };
@@ -83,6 +84,7 @@ export function ElectricalSection() {
           <TabsContent value="cable-calculator">
             <CableCalculator language={language as SupportedLanguage} />
           </TabsContent>
+
         </Tabs>
       </div>
     </section>

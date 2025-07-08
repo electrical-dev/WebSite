@@ -1,11 +1,11 @@
-import { AboutSection } from "../Components/about-section";
-import { ContactSection } from "../Components/contact-section";
-import { ElectricalSection } from "../Components/electrical-section";
-import { ExperienceSection } from "../Components/experience-section";
-import { HeroSection } from "../Components/hero-section";
-import { LanguageSwitcher } from "../Components/language-switcher";
-import { ProjectsSection } from "../Components/projects-section";
-import { YouTubeSection } from "../Components/youtube-section";
+import { AboutSection } from "../templates/about-section";
+import { ContactSection } from "../templates/contact-section";
+import { ElectricalLoadCalculationsSection } from "../templates/electrical-load-calculations-section";
+import { ElectricalSection } from "../templates/electrical-section";
+import { ExperienceSection } from "../templates/experience-section";
+import { HeroSection } from "../templates/hero-section";
+import { ProjectsSection } from "../templates/projects-section";
+import { YouTubeSection } from "../templates/youtube-section";
 
 
 export default function Home() {
@@ -14,6 +14,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <ElectricalSection />
+      <ElectricalLoadCalculationsSection />
       <YouTubeSection />
       <ExperienceSection />
       <ProjectsSection />

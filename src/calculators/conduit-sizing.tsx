@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Card, CardHeader, CardTitle, CardContent } from "../Components/ui/card";
+import { Button } from "../Components/ui/button";
+import { Input } from "../Components/ui/input";
+import { Label } from "../Components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../Components/ui/select";
 
 type SupportedLanguage = "en" | "es";
 
@@ -29,6 +29,8 @@ export function ConduitSizing({ language }: { language: SupportedLanguage }) {
       summaryTitle: "Resumen de Cálculo",
       cablesUsed: "Cables Utilizados:",
       recommendedConduitDiameter: "Diámetro de Tubería Recomendado:",
+      totalCableArea: "Área Total de Cables:",
+      conduitArea: "Área de Tubería:",
     },
     en: {
       title: "Conduit Sizing",
@@ -50,6 +52,8 @@ export function ConduitSizing({ language }: { language: SupportedLanguage }) {
       summaryTitle: "Calculation Summary",
       cablesUsed: "Cables Used:",
       recommendedConduitDiameter: "Recommended Conduit Diameter:",
+      totalCableArea: "Total Cable Area:",
+      conduitArea: "Conduit Area:",
     }
   };
 
@@ -161,7 +165,7 @@ export function ConduitSizing({ language }: { language: SupportedLanguage }) {
   const [visualization, setVisualization] = useState(false);
   const [sizingResults, setSizingResults] = useState<{
     smaller: { size: string; percentage: number } | null;
-    recommended: { size: string; percentage: number; diameterMM: number } | null;
+    recommended: { size: string; percentage: number; diameterMM: number; totalCableAreaMM2?: number; conduitAreaMM2?: number; } | null;
     larger: { size: string; percentage: number } | null;
   }>({
     smaller: null,
@@ -225,7 +229,7 @@ export function ConduitSizing({ language }: { language: SupportedLanguage }) {
     // Prepare results for recommended, smaller and larger sizes
     const results = {
       smaller: null as { size: string; percentage: number } | null,
-      recommended: null as { size: string; percentage: number; diameterMM: number } | null,
+      recommended: null as { size: string; percentage: number; diameterMM: number; totalCableAreaMM2?: number; conduitAreaMM2?: number; } | null,
       larger: null as { size: string; percentage: number } | null
     };
 
@@ -234,11 +238,14 @@ export function ConduitSizing({ language }: { language: SupportedLanguage }) {
       const recommendedSize = conduitSizeOrder[recommendedSizeIndex];
       const recommendedPercentage = (totalArea / conduitSizes[conduitType][recommendedSize]) * 100;
       const recommendedDiameterMM = conduitInteriorDiameters[conduitType][recommendedSize];
+      const recommendedConduitArea = conduitSizes[conduitType][recommendedSize];
 
       results.recommended = {
         size: recommendedSize,
         percentage: parseFloat(recommendedPercentage.toFixed(1)),
-        diameterMM: recommendedDiameterMM
+        diameterMM: recommendedDiameterMM,
+        totalCableAreaMM2: totalArea,
+        conduitAreaMM2: recommendedConduitArea
       };
 
       // Smaller size (if available)
@@ -664,6 +671,16 @@ export function ConduitSizing({ language }: { language: SupportedLanguage }) {
                     {sizingResults.recommended.diameterMM && (
                       <p className="mt-2">
                         <strong>{content[language].recommendedConduitDiameter}</strong> {sizingResults.recommended.size}" ({sizingResults.recommended.diameterMM.toFixed(2)} mm)
+                      </p>
+                    )}
+                    {sizingResults.recommended.totalCableAreaMM2 !== undefined && (
+                      <p>
+                        <strong>{content[language].totalCableArea}</strong> {sizingResults.recommended.totalCableAreaMM2.toFixed(2)} mm²
+                      </p>
+                    )}
+                    {sizingResults.recommended.conduitAreaMM2 !== undefined && (
+                      <p>
+                        <strong>{content[language].conduitArea}</strong> {sizingResults.recommended.conduitAreaMM2.toFixed(2)} mm²
                       </p>
                     )}
                   </div>
