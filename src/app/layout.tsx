@@ -8,6 +8,7 @@ import { LanguageSwitcher } from "../Components/language-switcher"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Metadata } from "next"
 import { ThemeToggle } from "../Components/theme-toggle"
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -54,6 +55,7 @@ export default function RootLayout({
           />
         </ThemeProvider>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
